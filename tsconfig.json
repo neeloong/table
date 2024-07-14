@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "allowJs": true,
+    "checkJs": true,
+    "target": "ESNext",
+    "strict": true,
+    "moduleResolution": "Node",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "useDefineForClassFields": true,
+    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+      "@neeloong/table": [
+        "packages/table"
+      ],
+      "@neeloong/table-gantt": [
+        "./packages/table-gantt"
+      ],
+      "@neeloong/table-vue": [
+        "packages/table-vue"
+      ],
+    }
+  }
+}

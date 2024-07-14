@@ -1,0 +1,11 @@
+{
+  "name": "@neeloong/table-demo",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@neeloong/table": "workspace:../packages/table",
+    "@neeloong/table-gantt": "workspace:../packages/table-gantt",
+    "@neeloong/table-vue": "workspace:../packages/table-vue",
+    "vue": "^3.4.31"
+  }
+}

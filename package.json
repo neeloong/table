@@ -1,0 +1,38 @@
+{
+  "name": "@neeloong/table",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "vite",
+    "build": "node build.mjs",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/neeloong/table.git"
+  },
+  "author": "匿龙NeeLoong",
+  "license": "MIT",
+  "keywords": [
+    "ui",
+    "table",
+    "tagged"
+  ],
+  "homepage": "https://gitee.com/neeloong/table#git-readme",
+  "bugs": {
+    "url": "https://gitee.com/neeloong/table/issues"
+  },
+  "devDependencies": {
+    "@rollup/plugin-replace": "^5.0.7",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@vitejs/plugin-vue": "^4.6.2",
+    "less": "^4.2.0",
+    "less-loader": "^11.1.4",
+    "postcss": "^8.4.39",
+    "postcss-import": "^16.1.0",
+    "rollup": "^4.18.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "typescript": "^5.5.2",
+    "vite": "^4.5.3"
+  }
+}

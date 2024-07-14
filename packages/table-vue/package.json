@@ -1,0 +1,22 @@
+{
+  "name": "@neeloong/table-vue",
+  "version": "0.0.0",
+  "keywords": [
+    "vue"
+  ],
+  "private": true,
+  "type": "module",
+  "main": "./index.mjs",
+  "module": "./index.mjs",
+  "types": "./index.types.mts",
+  "devDependencies": {
+    "@neeloong/table": "workspace:../table",
+    "vue": "^3.4.31"
+  },
+  "exports": {
+    ".": {
+      "default": "./index.mjs",
+      "types": "./index.types.mts"
+    }
+  }
+}

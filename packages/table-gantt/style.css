@@ -1,0 +1,88 @@
+.neeloong-table-gantt-header {
+	display: flex;
+	flex-direction: column;
+	line-height: calc(
+		var(--neeloong-table-header-row-height) / var(--neeloong-table-gantt-header-lines)
+	);
+	font-size: min(
+		calc(
+			var(--neeloong-table-header-row-height) /
+				var(--neeloong-table-gantt-header-lines)
+		),
+		12px
+	);
+	> div {
+		flex: 1;
+		overflow: hidden;
+		display: flex;
+		flex-direction: row;
+		> span {
+			position: relative;
+			overflow: hidden;
+			text-align: center;
+			inline-size: calc(
+				var(--neeloong-table-gantt-header-size) *
+					var(--neeloong-table-gantt-day-width)
+			);
+			&::after {
+				content: '';
+				inset-inline-end: 0;
+				position: absolute;
+				width: 1px;
+				inset-block: 0;
+				background: #d7d7d7;
+				margin-block: 5px;
+			}
+		}
+	}
+}
+.neeloong-table-gantt-today {
+	.neeloong-table-gantt-customize & {
+		position: absolute;
+		block-size: 100%;
+		inline-size: 2px;
+		background: #1890ff;
+		pointer-events: none;
+		margin-inline-start: calc(
+			var(--neeloong-table-gantt-start) * var(--neeloong-table-gantt-day-width)
+		);
+	}
+}
+.neeloong-table-gantt-cell {
+	background-image: var(--neeloong-table-gantt-background);
+	background-size: 100%;
+	background-color: #fff;
+	background-repeat: repeat;
+	&::before {
+		content: '';
+		inset-inline-start: 0;
+		position: absolute;
+		width: 1px;
+		inset-block: 0;
+		background: #d7d7d7;
+	}
+}
+.neeloong-table-gantt-dot {
+	position: absolute;
+	font-size: var(--neeloong-table-gantt-dot-size, 1em);
+	inset-inline-start: calc(
+		(var(--neeloong-table-gantt-start) + var(--neeloong-table-gantt-dot-begin)) *
+			var(--neeloong-table-gantt-day-width)
+	);
+	inset-block-start: var(--neeloong-table-gantt-dot-position);
+	transform: translate(-50%, -50%);
+}
+.neeloong-table-gantt-line {
+	position: absolute;
+	inset-inline-start: calc(
+		(var(--neeloong-table-gantt-start) + var(--neeloong-table-gantt-line-begin)) *
+			var(--neeloong-table-gantt-day-width)
+	);
+	inline-size: calc(
+		var(--neeloong-table-gantt-line-size) * var(--neeloong-table-gantt-day-width)
+	);
+
+	inset-block-start: var(--neeloong-table-gantt-line-position);
+	block-size: var(--neeloong-table-gantt-line-weight);
+	border: 1px #aaa solid;
+}

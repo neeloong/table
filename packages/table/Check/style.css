@@ -1,0 +1,11 @@
+.neeloong-table-checkable {
+	display: flex;
+	> input[type='checkbox']:first-child {
+		margin-inline: 8px;
+		margin-block: auto;
+	}
+	> :last-child {
+		flex: 1;
+		overflow: auto;
+	}
+}

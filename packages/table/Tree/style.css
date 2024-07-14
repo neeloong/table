@@ -1,0 +1,42 @@
+.neeloong-table-tree {
+	display: flex;
+	flex-direction: row;
+}
+.neeloong-table-tree-collapser {
+	block-size: 20px;
+	inline-size: 20px;
+	margin-inline-start: calc(var(--neeloong-table-tree-level) * 20px);
+	margin-block: auto;
+	+ div {
+		position: relative;
+		flex: 1;
+		.neeloong-table-cell-ellipsis & {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	}
+}
+.neeloong-table-tree-collapsible .neeloong-table-tree-collapser {
+	position: relative;
+	cursor: pointer;
+	transform:rotate(90deg);	
+	transition: transform .2s;
+	&::after {
+		content: '';
+		border: 1px solid transparent;
+		inline-size: 6px;
+		block-size: 6px;
+		border-block-end-color: currentColor;
+		border-inline-end-color: currentColor;
+		transform-origin: center;
+		position: absolute;
+		transform:rotate(-45deg);
+		inset: 0;
+		margin: auto;
+		margin-inline-start: 4px;
+	}
+}
+.neeloong-table-tree-collapsible.neeloong-table-tree-collapsed .neeloong-table-tree-collapser {
+	transform: none;
+}

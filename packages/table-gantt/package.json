@@ -1,0 +1,21 @@
+{
+  "name": "@neeloong/table-gantt",
+  "version": "0.0.0",
+  "keywords": [
+    "gantt"
+  ],
+  "private": true,
+  "type": "module",
+  "main": "./index.mjs",
+  "module": "./index.mjs",
+  "types": "./index.types.mts",
+  "devDependencies": {
+    "@neeloong/table": "workspace:../table"
+  },
+  "exports": {
+    ".": {
+      "default": "./index.mjs",
+      "types": "./index.types.mts"
+    }
+  }
+}
