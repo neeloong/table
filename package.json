@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "vite",
-    "build": "node build.mjs",
+    "build": "tsc -p tsconfig.json && node build.mjs",
     "preview": "vite preview"
   },
   "repository": {

@@ -58,6 +58,8 @@ for (const {dir} of allItems) {
 	await fsPromise.mkdir(`dist/${dir}`, { recursive: true });
 }
 
+/** @type {Set<string>} */
+const hasCss = new Set();
 console.log('打包...');
 for (const {dir, name, version} of allItems) {
 	const banner = createBanner(dir, version);
@@ -82,6 +84,7 @@ for (const {dir, name, version} of allItems) {
 
 	const cssInput = `packages/${dir}/style.css`;
 	if (await fsPromise.stat(cssInput).catch(() => false)) {
+		hasCss.add(dir)
 		const cssOutput = `dist/${dir}/style.css`
 		console.log(`  生成 ${cssOutput} ...`);
 		const css = await fsPromise.readFile(cssInput, "utf8")
@@ -91,7 +94,7 @@ for (const {dir, name, version} of allItems) {
 		await fsPromise.writeFile(cssOutput, result.css);
 	}
 
-	const dtsInput = `packages/${dir}/index.types.mts`;
+	const dtsInput = `typings/${dir}/index.types.d.mts`;
 	const dtsOutput = `dist/${dir}/index.d.ts`
 	console.log(`  生成 ${dtsOutput} ...`);
 	const dtsBundle = await rollup({ input: dtsInput, external, plugins: [dts()] });
@@ -119,6 +122,9 @@ for (const {dir, name, version, description, keywords: selfKeywords} of allItems
 				unpkg: './index.js',
 				jsdelivr: './index.js',
 			},
+			...hasCss.has(dir) ? {
+				'./style.css': './style.css',
+			} : {},
 		},
 	}, null, 2));
 }
