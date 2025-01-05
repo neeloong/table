@@ -86,7 +86,7 @@ function toTree(rows) {
  * @returns 
  */
 function createRowEl(setSelected) {
-	const el = document.createElement('div');
+	const el = document.createElement('tr');
 	el.className = 'neeloong-table-row';
 	el.addEventListener('click', e => {
 		for (const v of e.composedPath()) {
@@ -96,7 +96,7 @@ function createRowEl(setSelected) {
 		}
 		setSelected();
 	});
-	el.appendChild(document.createElement('div')).className = 'neeloong-table-fixed-line';
+	el.appendChild(document.createElement('span')).className = 'neeloong-table-fixed-line';
 	return el;
 }
 

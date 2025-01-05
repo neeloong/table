@@ -33,7 +33,7 @@ const Group = {
 			group.paused = paused;
 		});
 		return () => [
-			ctx.slots.default?.({ group: unref(group) }) || h('div', [
+			ctx.slots.default?.({ group: unref(group) }) || h('table', [
 				h(Header, { group: unref(group) }),
 				h(Body, { group: unref(group) }),
 			]),

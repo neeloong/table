@@ -18,7 +18,7 @@ const Body = {
 			if (!current || !rowHeight) { return; }
 			current.rowHeight = rowHeight;
 		});
-		return () => h('div', { ref: root });
+		return () => h('tbody', { ref: root });
 	},
 };
 

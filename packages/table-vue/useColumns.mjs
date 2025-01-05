@@ -17,7 +17,7 @@ function create(
 	key,
 	className,
 ) {
-	const root = document.createElement('div');
+	const root = document.createElement('td');
 	if (className) {
 		root.className += ` ${className}`;
 	}
@@ -58,7 +58,7 @@ export default function useColumns(columns) {
 	let id = 0;
 	/** @type {import('vue').ShallowReactive<import('vue').VNode[]>} */
 	const list = shallowReactive([]);
-	const renderTo = document.createElement('div');
+	const renderTo = document.createElement('tbody');
 	/**
 	 * 
 	 * @param {import('./types.mjs').VueColumn} column 

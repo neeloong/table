@@ -189,7 +189,7 @@ const Gantt = (options, update, api, next, colOpt) => {
 		},
 		render: p => {
 			let { id, data } = p;
-			const root = document.createElement('div');
+			const root = document.createElement('td');
 			// root.style.setProperty('--neeloong-table-gantt-start', `var(${prefix}-start)`);
 			// root.style.setProperty('--neeloong-table-gantt-day-width', `var(${prefix}-day-width)`);
 			root.classList.add('neeloong-table-gantt-cell');
@@ -234,7 +234,7 @@ const Gantt = (options, update, api, next, colOpt) => {
 			return { root, destroy() { } };
 		},
 		header: () => {
-			const root = document.createElement('div');
+			const root = document.createElement('th');
 			headers.add(root);
 			root.classList.add('neeloong-table-gantt-header');
 			// root.style.setProperty('--neeloong-table-gantt-header-lines', `var(${prefix}-header-lines)`)

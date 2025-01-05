@@ -17,10 +17,10 @@ export default class Header {
 	constructor(root, group, remove) {
 		this.#remove = remove;
 		this.#group = group;
-		const header = root || document.createElement('div');
+		const header = root || document.createElement('tr');
 		this.root = header;
 		header.classList.add('neeloong-table', 'neeloong-table-headers');
-		header.appendChild(document.createElement('div')).className = 'neeloong-table-fixed-line';
+		header.appendChild(document.createElement('span')).className = 'neeloong-table-fixed-line';
 	}
 	/** @type {Map<import('../types/index.mjs').ColumnCell, [import('../types/index.mjs').ColumnComponent, HTMLElement, import('./createHeader.mjs').ColumnState]>} */
 	#headerMap = new Map();

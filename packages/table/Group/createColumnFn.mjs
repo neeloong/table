@@ -5,7 +5,7 @@ import noop from '../utils/noop.mjs';
  * @returns {import('../types/index.mjs').ColumnComponent}
  */
 const defaultHeaderRenderer = ({ column: { title = '' } }) => {
-	const root = document.createElement('div');
+	const root = document.createElement('th');
 
 	root.innerText = title;
 	return {
@@ -22,7 +22,7 @@ const defaultHeaderRenderer = ({ column: { title = '' } }) => {
  * @returns {import('../types/index.mjs').CellComponent}
  */
 const defaultRenderer = ({ value }) => {
-	const root = document.createElement('div');
+	const root = document.createElement('td');
 
 	/**
 	 * 
@@ -43,7 +43,7 @@ const defaultRenderer = ({ value }) => {
 };
 
 const noopRender = () => ({
-	root: document.createElement('div'),
+	root: document.createElement('td'),
 	destroy: noop,
 	setHidden: noop,
 	update: noop,

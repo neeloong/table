@@ -19,7 +19,7 @@ import pointerCapture from './pointerCapture.mjs';
  * @returns {[import('../types/index.mjs').ColumnComponent, HTMLElement, ColumnState]}
  */
 export default function createHeader(requestRender, header, column) {
-	const resize = document.createElement('div');
+	const resize = document.createElement('span');
 	resize.classList.add('neeloong-table-resize');
 	const headerComponent = column.header({ column: column.options });
 	const el = headerComponent.root;

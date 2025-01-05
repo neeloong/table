@@ -50,6 +50,7 @@
 	position: relative;
 	block-size: var(--neeloong-table-header-row-height);
 	inline-size: var(--neeloong-table-width);
+	display: block;
 
 }
 
@@ -71,6 +72,7 @@
 
 .neeloong-table-header {
 	position: absolute;
+	display: block;
 	inset-block: 0;
 	block-size: 100%;
 	box-sizing: border-box;
@@ -80,7 +82,9 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	
+}
+th.neeloong-table-header, td.neeloong-table-header {
+	padding: 0;
 }
 
 .neeloong-table-header-fixed {
@@ -164,14 +168,19 @@
 	display: flex;
 	flex-direction: row;
 	box-sizing: border-box;
+	display: block;
 }
 
 .neeloong-table-cell {
 	position: absolute;
+	display: block;
 	block-size: 100%;
 	box-shadow: inset 0 -1px var(--neeloong-table-row-border-color, #ccc);
 	background-color: #ffffff;
 	inset-inline-start: var(--neeloong-table-column-start);
+}
+th.neeloong-table-cell, td.neeloong-table-cell {
+	padding: 0;
 }
 
 .neeloong-table-cell-ellipsis {

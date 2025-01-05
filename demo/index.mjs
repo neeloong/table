@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './index.vue'
-import '../packages/core/style.css';
-import '../packages/gantt/style.css';
+import '../packages/table/style.css';
+import '../packages/table-gantt/style.css';
 
 createApp(App).mount('#app')

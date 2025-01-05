@@ -57,7 +57,7 @@ export default class Body {
 	/** @readonly @type {HTMLElement} */
 	root;
 	/** @readonly @type {HTMLElement} */
-	#main = document.createElement('div');
+	#main = document.createElement('tbody');
 	/** @returns {Iterable<DOMRect>} */
 	#getClientRects = () => [];
 	get getClientRects() { return this.#getClientRects; }
@@ -88,7 +88,7 @@ export default class Body {
 	constructor(root, group, remove) {
 		this.#remove = remove;
 		this.#group = group;
-		const body = root || document.createElement('div');
+		const body = root || document.createElement('table');
 		this.root = body;
 		const main = body.appendChild(this.#main);
 		body.classList.add('neeloong-table', 'neeloong-table-body');

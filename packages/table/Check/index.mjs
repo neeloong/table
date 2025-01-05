@@ -14,7 +14,7 @@ function createCell(render) {
 		const { rowApi } = p;
 		const checkbox = document.createElement('input');
 		checkbox.type = 'checkbox';
-		const root = document.createElement('div');
+		const root = document.createElement('td');
 		root.appendChild(checkbox);
 		root.classList.add(styles.checkable);
 		root.classList.add(styles.selectable);
@@ -51,7 +51,7 @@ function createCell(render) {
 function createHeader(api, header) {
 	return p => {
 
-		const root = document.createElement('div');
+		const root = document.createElement('th');
 		const headerCheck = document.createElement('input');
 		headerCheck.type = 'checkbox';
 		headerCheck.checked = false;

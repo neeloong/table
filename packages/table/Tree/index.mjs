@@ -11,10 +11,10 @@ const styles = {
 function createRender(render) {
 	return p => {
 		const { rowApi } = p;
-		const root = document.createElement('div');
+		const root = document.createElement('td');
 		root.style.display = 'flex';
 		root.classList.add('neeloong-table-tree');
-		const collapser = root.appendChild(document.createElement('div'));
+		const collapser = root.appendChild(document.createElement('span'));
 		collapser.className = styles.collapser;
 		collapser.classList.add(styles.selectable);
 		collapser.addEventListener('click', e => {
@@ -55,10 +55,43 @@ function createRender(render) {
 		};
 	};
 }
+
+/**
+ * 
+ * @param {import('../types/index.mjs').Api} api 
+ * @param {(param: import('../types/index.mjs').ColumnParam) => import('../types/index.mjs').ColumnComponent} header 
+ * @returns {(param: import('../types/index.mjs').ColumnParam) => import('../types/index.mjs').ColumnComponent}
+ */
+function createHeader(api, header) {
+	return p => {
+
+		const root = document.createElement('th');
+		root.style.display = 'flex';
+		root.classList.add('neeloong-table-tree');
+		const collapser = root.appendChild(document.createElement('span'));
+		collapser.className = styles.collapser;
+		collapser.classList.add(styles.selectable);
+
+
+		const comp = header(p);
+		root.appendChild(comp.root);
+		return {
+			...comp,
+			root,
+			destroy() {
+				comp.destroy();
+			},
+		};
+	};
+}
 /** @type {import('../types/index.mjs').Extension} */
 const Tree = (_, update, api, next) => {
 	const cc = next(update);
-	return { ...cc, render: createRender(cc.render) };
+	return {
+		...cc,
+		render: createRender(cc.render),
+		header: createHeader(api, cc.header),
+	};
 };
 
 export default Tree;

@@ -13,7 +13,7 @@ const Header = {
 		const root = ref();
 		useHeader(root, computed(() => props.group));
 
-		return () => h('div', { ref: root });
+		return () => h('tr', { ref: root });
 	},
 };
 
