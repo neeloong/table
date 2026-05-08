@@ -1,9 +1,11 @@
+/** @import { GanttHeader } from './types.mjs' */
+
 import date2n from './date2n.mjs';
 import n2date from './n2date.mjs';
 
 /**
  * 
- * @param {import('./types.mjs').GanttHeader[]} gets 
+ * @param {GanttHeader[]} gets 
  * @param {HTMLElement[]} headers 
  * @param {Date} start 
  * @param {Date} end 
@@ -16,7 +18,7 @@ export default function renderHeaders(gets, headers, start, end) {
 	 * @property {string | number} key
 	 * @property {number} length
 	 * @property {Date} [date]
-	 * @property {import('./types.mjs').GanttHeader} get
+	 * @property {GanttHeader} get
 	 */
 	for (const el of headers) {
 		el.innerHTML = '';

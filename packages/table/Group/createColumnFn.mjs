@@ -1,8 +1,10 @@
+/** @import { Api, CellComponent, CellParam, CellUpdate, ColumnDefine, ColumnComponent, ColumnOptions, ColumnParam, Extension, NextColumn } from '../types/index.mjs' */
+
 import noop from '../utils/noop.mjs';
 /**
  * 
- * @param {import('../types/index.mjs').ColumnParam} param 
- * @returns {import('../types/index.mjs').ColumnComponent}
+ * @param {ColumnParam} param 
+ * @returns {ColumnComponent}
  */
 const defaultHeaderRenderer = ({ column: { title = '' } }) => {
 	const root = document.createElement('th');
@@ -18,8 +20,8 @@ const defaultHeaderRenderer = ({ column: { title = '' } }) => {
 };
 /**
  * 
- * @param {import('../types/index.mjs').CellParam} param 
- * @returns {import('../types/index.mjs').CellComponent}
+ * @param {CellParam} param 
+ * @returns {CellComponent}
  */
 const defaultRenderer = ({ value }) => {
 	const root = document.createElement('td');
@@ -34,7 +36,7 @@ const defaultRenderer = ({ value }) => {
 	setValue(value);
 	/**
 	 * 
-	 * @param {import('../types/index.mjs').CellUpdate} row 
+	 * @param {CellUpdate} row 
 	 * @returns 
 	 */
 	const update = (row) => setValue(row.value);
@@ -48,15 +50,15 @@ const noopRender = () => ({
 	setHidden: noop,
 	update: noop,
 });
-/** @returns {import('../types/index.mjs').ColumnDefine} */
+/** @returns {ColumnDefine} */
 const createNoop = () => ({ updateData: noop, render: noopRender, header: noopRender, customize: noop });
 /**
  * 
- * @param {import('../types/index.mjs').ColumnOptions} column 
- * @param {import('../types/index.mjs').Extension[]} exFns 
+ * @param {ColumnOptions} column 
+ * @param {Extension[]} exFns 
  * @param {Record<string, any>} exOptions 
- * @param {import('../types/index.mjs').Api} api 
- * @returns {[import('../types/index.mjs').NextColumn, (allOptions: Record<string, any>[], opt: import('../types/index.mjs').ColumnOptions) => void, () => void]}
+ * @param {Api} api 
+ * @returns {[NextColumn, (allOptions: Record<string, any>[], opt: ColumnOptions) => void, () => void]}
  */
 export default function createColumnFn(
 	column,
@@ -68,21 +70,21 @@ export default function createColumnFn(
 	const header = typeof column.header === 'function' ? column.header : defaultHeaderRenderer;
 
 	let destroyed = false;
-	/** @type {((options: Record<string, any>, columnOptions: import('../types/index.mjs').ColumnOptions) => void)[]} */
+	/** @type {((options: Record<string, any>, columnOptions: ColumnOptions) => void)[]} */
 	const rootUpdates = [];
-	/** @type {import('../types/index.mjs').NextColumn} */
+	/** @type {NextColumn} */
 	let fn = u => {
 		if (destroyed) { return createNoop(); }
 		rootUpdates.push((_, v) => u(v));
 		return ({ ...column, render, header, updateData:noop, customize: noop });
 	};
-	/** @type {((options: Record<string, any>, columnOptions: import('../types/index.mjs').ColumnOptions) => void)[][]} */
+	/** @type {((options: Record<string, any>, columnOptions: ColumnOptions) => void)[][]} */
 	const updates = [];
 	updates[exFns.length] = rootUpdates;
 	/** @type {(() => void)[]} */
 	const destroys = [];
 	for (let i = exFns.length - 1; i >= 0; i--) {
-		/** @type {((options: Record<string, any>, columnOptions: import('../types/index.mjs').ColumnOptions) => void)[]} */
+		/** @type {((options: Record<string, any>, columnOptions: ColumnOptions) => void)[]} */
 		const update = [];
 		updates[i] = update;
 		const exFn = exFns[i];
@@ -96,7 +98,7 @@ export default function createColumnFn(
 			if (typeof destroy === 'function') {
 				destroys.push(destroy);
 			}
-			return /** @type {import('../types/index.mjs').ColumnDefine} */({ ...r,
+			return /** @type {ColumnDefine} */({ ...r,
 				updateData: typeof updateData === 'function' ? updateData : noop,
 				customize: typeof customize === 'function' ? customize : noop,
 			});
@@ -105,7 +107,7 @@ export default function createColumnFn(
 	/**
 	 * 
 	 * @param {Record<string, any>[]} allOptions 
-	 * @param {import('../types/index.mjs').ColumnOptions} opt 
+	 * @param {ColumnOptions} opt 
 	 * @returns 
 	 */
 	function updateExtensions(allOptions, opt) {

@@ -1,11 +1,14 @@
+/** @import { Ref } from 'vue' */
+/** @import { Group } from '@neeloong/table' */
+
 import { onActivated, onDeactivated, ref, watch, unref } from 'vue';
 
 import useDestroyable from './useDestroyable.mjs';
 
 /**
  * 
- * @param {import('vue').Ref<HTMLElement | undefined | null> | HTMLElement | undefined | null} [root] 
- * @param {import('vue').Ref<import('@neeloong/table').Group | undefined> | import('@neeloong/table').Group | undefined} [group] 
+ * @param {Ref<HTMLElement | undefined | null> | HTMLElement | undefined | null} [root] 
+ * @param {Ref<Group | undefined> | Group | undefined} [group] 
  * @returns 
  */
 export default function useHeader(root, group) {

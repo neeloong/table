@@ -1,8 +1,9 @@
+/** @import { EmitOption, EventContext, RowEmit, RowListen, Listener } from '../types/index.mjs' */
 
 /**
- * @param {Map<string | number, Map<string | symbol, Set<(v: any, ctx: import('../types/index.mjs').EventContext) => void>>>} events
+ * @param {Map<string | number, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} events
  * @param {string | number} row
- * @returns {Map<string | symbol, Set<(v: any, ctx: import('../types/index.mjs').EventContext) => void>>}
+ * @returns {Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>}
  */
 function getRow(events, row) {
 	let rowEvents = events.get(row);
@@ -13,9 +14,9 @@ function getRow(events, row) {
 
 }
 /**
- * @param {Map<string | symbol, Set<(v: any, ctx: import('../types/index.mjs').EventContext) => void>>} rowEvents
+ * @param {Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>} rowEvents
  * @param {any} key
- * @returns {Set<(v: any, ctx: import('../types/index.mjs').EventContext) => void>}
+ * @returns {Set<(v: any, ctx: EventContext) => void>}
  */
 function get(rowEvents, key) {
 	let set = rowEvents.get(key);
@@ -26,19 +27,19 @@ function get(rowEvents, key) {
 }
 /**
  * @template {object} T
- * @param {Map<string | number, Map<string | symbol, Set<(v: any, ctx: import('../types/index.mjs').EventContext) => void>>>} events
- * @returns {import('../types/index.mjs').RowListen<T>}
+ * @param {Map<string | number, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} events
+ * @returns {RowListen<T>}
  */
 export function createListenRow(events) {
 	/**
 	 * @param {string | number} row
 	 * @param {any} key
-	 * @param {import('../types/index.mjs').Listener<any>} fn
+	 * @param {Listener<any>} fn
 	 */
 	return (row, key, fn) => {
 		const rowEvents = getRow(events, row);
 		const set = get(rowEvents, key);
-		/** @type {(v: any, ctx: import('../types/index.mjs').EventContext) => void} */
+		/** @type {(v: any, ctx: EventContext) => void} */
 		const f = (...v) => fn(...v);
 		set.add(f);
 		return () => {
@@ -53,15 +54,15 @@ export function createListenRow(events) {
 
 /**
  * @template {object} T
- * @param {Map<string | number | symbol, Map<string | symbol, Set<(v: any, ctx: import('../types/index.mjs').EventContext) => void>>>} events
- * @returns {import('../types/index.mjs').RowEmit<T>}
+ * @param {Map<string | number | symbol, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} events
+ * @returns {RowEmit<T>}
  */
 export function createEmitRow(events) {
 	/**
 	 * @param {string | number | symbol} row
 	 * @param {any} key
 	 * @param {any} value
-	 * @param {import('../types/index.mjs').EmitOption} [opt]
+	 * @param {EmitOption} [opt]
 	 */
 	return (row, key, value, opt) => {
 		const set = events.get(row)?.get(key);
@@ -70,7 +71,7 @@ export function createEmitRow(events) {
 		let prevented = true;
 		let stop = false;
 		const cancelable = Boolean(opt?.cancelable);
-		/** @type {import('../types/index.mjs').EventContext} */
+		/** @type {EventContext} */
 		const ctx = {
 			stop() { stop = true; },
 			prevent() { prevented = true; },

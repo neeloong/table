@@ -1,3 +1,8 @@
+/** @import { Extension, ExtensionOption, RowValue } from '@neeloong/table' */
+/** @import { DotInfo } from './getDotData.mjs' */
+/** @import { LineInfo } from './getLineDates.mjs' */
+/** @import { Options, LineMeta } from './types.mjs' */
+
 /* eslint-disable prefer-destructuring */
 import { createKey } from '@neeloong/table';
 
@@ -14,7 +19,7 @@ import getDateData, { getDate } from './getDateData.mjs';
 import createDateKey, { createDateGetter } from './createDateKey.mjs';
 
 
-/** @type {import('@neeloong/table').Extension<import('./types.mjs').Options>} */
+/** @type {Extension<Options>} */
 const Gantt = (options, update, api, next, colOpt) => {
 	const summarize = createKey(options.summarize);
 	const todayStart = new Date();
@@ -39,13 +44,13 @@ const Gantt = (options, update, api, next, colOpt) => {
 	let endDateFields = Object.entries(options.endDateFields || {}).map(
 		([k, d]) => /** @type {[string, (v: any) => Date | undefined]} */([k, createDateKey(d, true)]),
 	) || [];
-	/** @type {import('./getLineDates.mjs').LineInfo[]} */
+	/** @type {LineInfo[]} */
 	let lines = options.lines?.map(({ start, end, ...line }) => ({
 		start: createDateGetter(start),
 		end: createDateGetter(end, true),
 		...line,
 	})) || [];
-	/** @type {import('./getDotData.mjs').DotInfo[]} */
+	/** @type {DotInfo[]} */
 	let dots = options.dots?.map(({ date, ...l }) => ({
 		date: createDateGetter(date), ...l,
 	})) || [];
@@ -55,7 +60,7 @@ const Gantt = (options, update, api, next, colOpt) => {
 	const headers = new Set();
 	/** @type {Set<() => void>} */
 	const cells = new Set();
-	/** @type {Map<number | string, ([Date, Date | null, import('./types.mjs').LineMeta?] | null)[]>} */
+	/** @type {Map<number | string, ([Date, Date | null, LineMeta?] | null)[]>} */
 	let allLineData = new Map();
 	/** @type {Map<number | string, Record<string, Date | undefined>>} */
 	let allDateData = new Map();
@@ -70,7 +75,7 @@ const Gantt = (options, update, api, next, colOpt) => {
 	let dayWidth = options.dayWidth || 10;
 	/** @type {number[]} */
 	let bgGroup = [];
-	/** @type {readonly import('@neeloong/table').RowValue[]} */
+	/** @type {readonly RowValue[]} */
 	let allData = [];
 
 	function updateSize() {
@@ -253,7 +258,7 @@ const Gantt = (options, update, api, next, colOpt) => {
 };
 
 /**
- * @param {import('./types.mjs').Options} options
- * @returns {import('@neeloong/table').ExtensionOption<import('./types.mjs').Options>}
+ * @param {Options} options
+ * @returns {ExtensionOption<Options>}
  */
 export default (options) => ({ ...options, extension: Gantt });

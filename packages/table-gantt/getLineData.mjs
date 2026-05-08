@@ -1,3 +1,7 @@
+/** @import { RowValue } from '@neeloong/table' */
+/** @import { LineInfo } from './getLineDates.mjs' */
+/** @import { DateGetter, Line, LineMeta } from './types.mjs' */
+
 import getDate from './getDate.mjs';
 import getLineDates from './getLineDates.mjs';
 
@@ -6,9 +10,9 @@ import getLineDates from './getLineDates.mjs';
  * @param {any} data 
  * @param {Record<string, Date | undefined>} dateDate 
  * @param {Record<string, Date | undefined>} endDateData 
- * @param {import('./getLineDates.mjs').LineInfo[]} lines 
- * @param {WeakMap<any, [([Date, Date | null, import('./types.mjs').LineMeta?] | null)[], Date, Date]>} dateMap 
- * @returns {[([Date, Date | null, import('./types.mjs').LineMeta?] | null)[], Date, Date]}
+ * @param {LineInfo[]} lines 
+ * @param {WeakMap<any, [([Date, Date | null, LineMeta?] | null)[], Date, Date]>} dateMap 
+ * @returns {[([Date, Date | null, LineMeta?] | null)[], Date, Date]}
  */
 function toLineData(
 	data,
@@ -35,14 +39,14 @@ function toLineData(
 }
 /**
  * 
- * @param {readonly import('@neeloong/table').RowValue[]} allData 
+ * @param {readonly RowValue[]} allData 
  * @param {Map<string | number, Record<string, Date | undefined>>} allDateData 
  * @param {Map<string | number, Record<string, Date | undefined>>} allEndDateData 
- * @param {import('./getLineDates.mjs').LineInfo[]} lines 
+ * @param {LineInfo[]} lines 
  * @param {(v: any) => boolean | undefined} summarize 
  * @param {Date} todayStart 
  * @param {Date} todayEnd 
- * @returns {[Date, Date, Map<number | string, ([Date, Date | null, import('./types.mjs').LineMeta?] | null)[]>]}
+ * @returns {[Date, Date, Map<number | string, ([Date, Date | null, LineMeta?] | null)[]>]}
  */
 export default function getLineData(
 	allData,
@@ -55,14 +59,14 @@ export default function getLineData(
 ) {
 	let lineStartDate = todayStart;
 	let lineEndDate = todayEnd;
-	/** @type {Map<number | string, ([Date, Date | null, import('./types.mjs').LineMeta?] | null)[]>} */
+	/** @type {Map<number | string, ([Date, Date | null, LineMeta?] | null)[]>} */
 	const allLineData = new Map();
-	/** @type {WeakMap<any, [([Date, Date | null, import('./types.mjs').LineMeta?] | null)[], Date, Date]>} */
+	/** @type {WeakMap<any, [([Date, Date | null, LineMeta?] | null)[], Date, Date]>} */
 	const baseDates = new WeakMap();
 
 	/**
 	 * 
-	 * @param {import('@neeloong/table').RowValue} v 
+	 * @param {RowValue} v 
 	 * @returns 
 	 */
 	function getShownDate(v) {

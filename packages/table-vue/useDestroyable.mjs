@@ -1,9 +1,11 @@
+/** @import { ComputedRef } from 'vue' */
+
 import { computed, ref, onMounted, onUnmounted, shallowRef, watchEffect } from 'vue';
 
 /**
  * @template {{destroy(): void}} T
  * @param {() => T | undefined} create 
- * @returns {import('vue').ComputedRef<T | undefined>}
+ * @returns {ComputedRef<T | undefined>}
  */
 export default function useDestroyable(create) {
 	/** @type {T | undefined} */

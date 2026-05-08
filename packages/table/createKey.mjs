@@ -1,6 +1,7 @@
+/** @import { IdKey, Key } from './types/index.mjs' */
 /**
  * @template {object} [T=object]
- * @param {import('./types/index.mjs').IdKey<T>} [idKey] 
+ * @param {IdKey<T>} [idKey] 
  * @returns {(v: any) => string | number}
  */
 export function createIdKey(idKey) {
@@ -16,7 +17,7 @@ export function createIdKey(idKey) {
 /**
  * @template R
  * @template {object} [T=object]
- * @param {import('./types/index.mjs').Key<R, T>} [key] 
+ * @param {Key<R, T>} [key] 
  * @returns {(v: any) => R | undefined}
  */
 export default function createKey(key) {
@@ -52,7 +53,7 @@ function toDate(date) {
 /**
  * 
  * @template {object} [T=object]
- * @param {import('./types/index.mjs').Key<Date | string | undefined, T>} [key] 
+ * @param {Key<Date | string | undefined, T>} [key] 
  * @returns {(v: any) => Date | undefined}
  */
 export function createDateKey(key) {

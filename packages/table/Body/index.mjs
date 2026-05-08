@@ -1,3 +1,7 @@
+/** @import { Row, RowDataProxy } from '../types/Row.mjs' */
+/** @import { ColumnCell, CustomizeComponent } from '../types/index.mjs' */
+/** @import Group from '../Group/index.mjs' */
+
 import { defaultRowHeight } from '../defaultConfig.mjs';
 import { verticalWritingMode } from '../verticalWritingMode.mjs';
 
@@ -42,8 +46,8 @@ function getBoundingClientRect(root, getClientRects) {
  */
 /**
  * 
- * @param {import('../types/index.mjs').ColumnCell} column 
- * @returns {[import('../types/index.mjs').CustomizeComponent, ColumnState]?}
+ * @param {ColumnCell} column 
+ * @returns {[CustomizeComponent, ColumnState]?}
  */
 function createCustomize(column) {
 	const customizeComponent = column.customize({ column: column.options }) || null;
@@ -75,14 +79,14 @@ export default class Body {
 		this.root.style.setProperty('--neeloong-table-row-height', `${v}px`);
 		this.requestRender();
 	}
-	/** @type {import('../Group/index.mjs').default} */
+	/** @type {Group} */
 	#group;
 	/** @type {() => void} */
 	#remove;
 	/**
 	 * 
 	 * @param {HTMLElement | undefined} root 
-	 * @param {import('../Group/index.mjs').default} group 
+	 * @param {Group} group 
 	 * @param {() => void} remove 
 	 */
 	constructor(root, group, remove) {
@@ -95,22 +99,22 @@ export default class Body {
 		main.classList.add('neeloong-table-main');
 		this.rowHeight = defaultRowHeight;
 	}
-	/** @type {import('../types/Row.mjs').RowDataProxy[]} */
+	/** @type {RowDataProxy[]} */
 	#shownRows = [];
 
-	/** @type {Map<import('../types/index.mjs').ColumnCell, [import('../types/index.mjs').CustomizeComponent, ColumnState] | null>} */
+	/** @type {Map<ColumnCell, [CustomizeComponent, ColumnState] | null>} */
 	#customizeMap = new Map();
-	/** @type {([import('../types/index.mjs').CustomizeComponent, ColumnState] | null)[]} */
+	/** @type {([CustomizeComponent, ColumnState] | null)[]} */
 	#customizeList = [];
 	/**
 	 * 
-	 * @param {import('../types/index.mjs').ColumnCell[]} columns 
+	 * @param {ColumnCell[]} columns 
 	 */
 	_updateColumns(columns) {
 		const oldMap = this.#customizeMap;
-		/** @type {Map<import('../types/index.mjs').ColumnCell, [import('../types/index.mjs').CustomizeComponent, ColumnState] | null>} */
+		/** @type {Map<ColumnCell, [CustomizeComponent, ColumnState] | null>} */
 		const newMap = new Map();
-		/** @type {([import('../types/index.mjs').CustomizeComponent, ColumnState] | null)[]} */
+		/** @type {([CustomizeComponent, ColumnState] | null)[]} */
 		const list = [];
 		this.#customizeList = list;
 		this.#customizeMap = newMap;
@@ -160,9 +164,9 @@ export default class Body {
 	}
 	/**
 	 * 
-	 * @param {import('../types/index.mjs').ColumnCell[]} columns 
-	 * @param {import('../types/Row.mjs').Row[]} rowData 
-	 * @param {Map<string | number | symbol, import('../types/Row.mjs').Row>} rowMap 
+	 * @param {ColumnCell[]} columns 
+	 * @param {Row[]} rowData 
+	 * @param {Map<string | number | symbol, Row>} rowMap 
 	 * @param {number[]} visibleRowIndexes 
 	 * @param {string | number | undefined} hoverId 
 	 * @param {string | number | symbol | undefined} selectedId 
@@ -234,8 +238,8 @@ export default class Body {
 }
 /**
  * 
- * @param {import('../types/index.mjs').ColumnCell[]} columns 
- * @param {([import('../types/index.mjs').CustomizeComponent, ColumnState] | null)[]} list 
+ * @param {ColumnCell[]} columns 
+ * @param {([CustomizeComponent, ColumnState] | null)[]} list 
  */
 function renderCustomize(columns, list) {
 	let i = 0;

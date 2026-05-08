@@ -1,3 +1,5 @@
+/** @import { Row } from '../types/Row.mjs' */
+/** @import { ColumnOptions, Emit, EventContext, EventMap, IdKey, Key, Listen, Options, RowEmit, RowEventMap, RowListen, RowValue } from '../types/index.mjs' */
 
 import Group from '../Group/index.mjs';
 import { isEq } from '../utils/isEq.mjs';
@@ -8,29 +10,29 @@ import updateCollapse from './updateCollapse.mjs';
 import updateVisible from './updateVisible.mjs';
 import setValue from './setValue.mjs';
 export default class Source {
-	/** @type {import('../types/Row.mjs').Row[]} */
+	/** @type {Row[]} */
 	#rowData = [];
-	/** @type {Map<string | number | symbol, import('../types/Row.mjs').Row>} */
+	/** @type {Map<string | number | symbol, Row>} */
 	#rowMap = new Map();
-	/** @type {import('../types/index.mjs').IdKey<object> | undefined} */
+	/** @type {IdKey<object> | undefined} */
 	#idKey;
-	/** @type {import('../types/index.mjs').Key<string | number, object> | undefined} */
+	/** @type {Key<string | number, object> | undefined} */
 	#parentKey;
 	/** @type {number[]} */
 	#visibleRowIndexes = [];
 
-	/** @type {Map<string | number, Map<string | symbol, Set<(v: any, ctx: import('../types/index.mjs').EventContext) => void>>>} */
+	/** @type {Map<string | number, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} */
 	#rowEvents = new Map();
-	/** @readonly @type {import('../types/index.mjs').RowEmit<import('../types/index.mjs').RowEventMap>} */
+	/** @readonly @type {RowEmit<RowEventMap>} */
 	emitRow = createEmitRow(this.#rowEvents);
-	/** @readonly @type {import('../types/index.mjs').RowListen<import('../types/index.mjs').RowEventMap>} */
+	/** @readonly @type {RowListen<RowEventMap>} */
 	listenRow = createListenRow(this.#rowEvents);
 
-	/** @type {Record<any, Set<(v: any, ctx: import('../types/index.mjs').EventContext) => boolean>>} */
+	/** @type {Record<any, Set<(v: any, ctx: EventContext) => boolean>>} */
 	#events = {};
-	/** @readonly @type {import('../types/index.mjs').Emit<import('../types/index.mjs').EventMap>} */
+	/** @readonly @type {Emit<EventMap>} */
 	emit = createEmit(this.#events);
-	/** @readonly @type {import('../types/index.mjs').Listen<import('../types/index.mjs').EventMap>} */
+	/** @readonly @type {Listen<EventMap>} */
 	listen = createListen(this.#events);
 
 	#selectable = false;
@@ -203,7 +205,7 @@ export default class Source {
 		const rowMap = this.#rowMap;
 		const rowData = this.#rowData;
 		const oldExpanded = new Set(expanded);
-		/** @type {Set<import('../types/Row.mjs').Row>} */
+		/** @type {Set<Row>} */
 		const newExpanded = new Set();
 		expanded.clear();
 		for (const k of nl) {
@@ -259,7 +261,7 @@ export default class Source {
 	}
 	/**
 	 * 
-	 * @param {import('../types/index.mjs').Options} options 
+	 * @param {Options} options 
 	 */
 	constructor({
 		idKey,
@@ -271,7 +273,7 @@ export default class Source {
 
 	/**
 	 * 
-	 * @param {import('../types/index.mjs').ColumnOptions[]} [columns] 
+	 * @param {ColumnOptions[]} [columns] 
 	 * @param {number} [startFixed] 
 	 * @returns 
 	 */
@@ -361,7 +363,7 @@ export default class Source {
 			);
 		}
 	}
-	/** @type {readonly import('../types/index.mjs').RowValue[]} */
+	/** @type {readonly RowValue[]} */
 	#data = [];
 	/**
 	 * 

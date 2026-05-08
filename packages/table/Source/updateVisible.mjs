@@ -1,9 +1,11 @@
+/** @import { Row } from '../types/Row.mjs' */
+
 import { rowVisible } from './updateCollapse.mjs';
 
 /**
  * 
- * @param {import('../types/Row.mjs').Row[]} rowData 
- * @param {Map<string | number | symbol, import('../types/Row.mjs').Row>} rowMap 
+ * @param {Row[]} rowData 
+ * @param {Map<string | number | symbol, Row>} rowMap 
  * @param {Set<string | number>} expanded 
  * @returns 
  */

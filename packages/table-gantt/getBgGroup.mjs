@@ -1,9 +1,11 @@
+/** @import { GanttHeader } from './types.mjs' */
+
 import date2n from './date2n.mjs';
 import n2date from './n2date.mjs';
 
 /**
  * 
- * @param {import('./types.mjs').GanttHeader} get 
+ * @param {GanttHeader} get 
  * @param {Date} start 
  * @param {Date} end 
  * @returns 

@@ -1,17 +1,21 @@
+/** @import { ColumnCell, ColumnComponent } from '../types/index.mjs' */
+/** @import Group from '../Group/index.mjs' */
+/** @import { ColumnState } from './createHeader.mjs' */
+
 import createHeader from './createHeader.mjs';
 
 
 export default class Header {
 	/** @readonly @type {HTMLElement} */
 	root;
-	/** @type {import('../Group/index.mjs').default} */
+	/** @type {Group} */
 	#group;
 	/** @type {() => void} */
 	#remove;
 	/**
 	 * 
 	 * @param {HTMLElement | undefined} root 
-	 * @param {import('../Group/index.mjs').default} group 
+	 * @param {Group} group 
 	 * @param {() => void} remove 
 	 */
 	constructor(root, group, remove) {
@@ -22,19 +26,19 @@ export default class Header {
 		header.classList.add('neeloong-table', 'neeloong-table-headers');
 		header.appendChild(document.createElement('span')).className = 'neeloong-table-fixed-line';
 	}
-	/** @type {Map<import('../types/index.mjs').ColumnCell, [import('../types/index.mjs').ColumnComponent, HTMLElement, import('./createHeader.mjs').ColumnState]>} */
+	/** @type {Map<ColumnCell, [ColumnComponent, HTMLElement, ColumnState]>} */
 	#headerMap = new Map();
-	/** @type {[import('../types/index.mjs').ColumnComponent, HTMLElement, import('./createHeader.mjs').ColumnState][]} */
+	/** @type {[ColumnComponent, HTMLElement, ColumnState][]} */
 	#headerList = [];
 	/**
 	 * 
-	 * @param {import('../types/index.mjs').ColumnCell[]} columns 
+	 * @param {ColumnCell[]} columns 
 	 */
 	_updateColumns(columns) {
 		const oldMap = this.#headerMap;
-		/** @type {Map<import('../types/index.mjs').ColumnCell, [import('../types/index.mjs').ColumnComponent, HTMLElement, import('./createHeader.mjs').ColumnState]>} */
+		/** @type {Map<ColumnCell, [ColumnComponent, HTMLElement, ColumnState]>} */
 		const newMap = new Map();
-		/** @type {[import('../types/index.mjs').ColumnComponent, HTMLElement, import('./createHeader.mjs').ColumnState][]} */
+		/** @type {[ColumnComponent, HTMLElement, ColumnState][]} */
 		const list = [];
 		const requestRender = () => {
 			this.#group.requestRender();
@@ -87,7 +91,7 @@ export default class Header {
 	}
 	/**
 	 * 
-	 * @param {import('../types/index.mjs').ColumnCell[]} columns 
+	 * @param {ColumnCell[]} columns 
 	 * @param {boolean} [force] 
 	 * @returns 
 	 */

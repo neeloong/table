@@ -1,3 +1,5 @@
+/** @import { Key } from '@neeloong/table' */
+/** @import { DateGetter, DateKey } from './types.mjs' */
 const regex = /^(\d+)-(\d{1,2})-(\d{1,2})(?:(?: +|[Tt])([0-1]?\d|2[0-3])(?::([0-5]?\d)(?::([0-5]?\d)(?:.(?:(\d+))?)?)?)?)?$/;
 /**
  * 
@@ -50,7 +52,7 @@ function toDate(date, end) {
 
 /**
  * @template {object} [T=object]
- * @param {import('@neeloong/table').Key<Date | string | undefined, T>} [key] 
+ * @param {Key<Date | string | undefined, T>} [key] 
  * @param {boolean} [end] 
  * @returns {(v: any) => Date | undefined}
  */
@@ -65,9 +67,9 @@ export default function createDateKey(key, end) {
 }
 /**
  * 
- * @param {import('./types.mjs').DateKey} [key] 
+ * @param {DateKey} [key] 
  * @param {boolean} [end] 
- * @returns {import('./types.mjs').DateGetter}
+ * @returns {DateGetter}
  */
 export function createDateGetter(key, end) {
 	if (typeof key === 'function') {

@@ -1,3 +1,7 @@
+/** @import { Row, RowDataProxy } from '../types/Row.mjs' */
+/** @import { Emit, IdKey, Key, Listen, RowApi, RowEventMap } from '../types/index.mjs' */
+/** @import Source from './index.mjs' */
+
 import createKey, { createIdKey } from '../createKey.mjs';
 
 /** @typedef {[string | number, any, string | number | undefined]} RowInfo */
@@ -102,12 +106,12 @@ function createRowEl(setSelected) {
 
 /**
  * 
- * @param {import('./index.mjs').default} source 
+ * @param {Source} source 
  * @param {string | number} id 
  * @param {HTMLDivElement} el 
- * @param {import('../types/index.mjs').Listen<import('../types/index.mjs').RowEventMap>} listen 
- * @param {import('../types/index.mjs').Emit<import('../types/index.mjs').RowEventMap>} emit 
- * @returns {import('../types/index.mjs').RowApi}
+ * @param {Listen<RowEventMap>} listen 
+ * @param {Emit<RowEventMap>} emit 
+ * @returns {RowApi}
  */
 function createRowApi(source, id, el, listen, emit) {
 	return {
@@ -126,26 +130,26 @@ function createRowApi(source, id, el, listen, emit) {
 
 /**
  * @template {object} T
- * @param {import('./index.mjs').default} source 
+ * @param {Source} source 
  * @param {object[]} rows 
  * @param {(id?: string | number) => void} setHover 
- * @param {Map<string | number | symbol, import('../types/Row.mjs').Row>} oldMap 
- * @param {import('../types/index.mjs').IdKey<T>} [idKey] 
- * @param {import('../types/index.mjs').Key<string | number, T>} [parentKey] 
- * @returns {[import('../types/Row.mjs').Row[], Map<string | number | symbol, import('../types/Row.mjs').Row>]}
+ * @param {Map<string | number | symbol, Row>} oldMap 
+ * @param {IdKey<T>} [idKey] 
+ * @param {Key<string | number, T>} [parentKey] 
+ * @returns {[Row[], Map<string | number | symbol, Row>]}
  */
 export default function setValue(source, rows, setHover, oldMap, idKey, parentKey) {
 	const infoList = toTree(unique(rows, createIdKey(idKey), createKey(parentKey)));
-	/** @type {import('../types/Row.mjs').Row[]} */
+	/** @type {Row[]} */
 	const list = [];
-	/** @type {Map<string | number | symbol, import('../types/Row.mjs').Row>} */
+	/** @type {Map<string | number | symbol, Row>} */
 	const map = new Map();
 
-	/** @type {Set<import('../types/Row.mjs').Row>} */
+	/** @type {Set<Row>} */
 	const updatedRow = new Set();
 	/** @type {(string | number)[]} */
 	const ancestorIds = [];
-	/** @type {import('../types/Row.mjs').Row[]} */
+	/** @type {Row[]} */
 	const ancestors = [];
 	let index = 0;
 	for (const [id, data, parentId] of infoList) {
@@ -182,7 +186,7 @@ export default function setValue(source, rows, setHover, oldMap, idKey, parentKe
 					const el = createRowEl(() => source.toggleSelected(this.id));
 					el.addEventListener('pointerenter', () => { setHover(id); });
 					el.addEventListener('pointerleave', () => { setHover(); });
-					/** @type {import('../types/Row.mjs').RowDataProxy} */
+					/** @type {RowDataProxy} */
 					const elProxy = {
 						el, index: this.index, row: this, cells: new Map(), shown: [],
 						api: createRowApi(source, id, el, listen, emit),

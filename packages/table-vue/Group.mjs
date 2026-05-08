@@ -1,3 +1,7 @@
+/** @import { Component } from 'vue' */
+/** @import { Source } from '@neeloong/table' */
+/** @import { VueColumn } from './types.mjs' */
+
 import { onActivated, h, onDeactivated, ref, toRef, watch, unref } from 'vue';
 
 
@@ -8,11 +12,11 @@ import Body from './Body.mjs';
 
 /**
  * @typedef {object} GroupProps
- * @property {import('./types.mjs').VueColumn[]} [columns]
- * @property {import('@neeloong/table').Source} [source]
+ * @property {VueColumn[]} [columns]
+ * @property {Source} [source]
  * @property {number} [startFixed]
  */
-/** @type {import('vue').Component<GroupProps>} */
+/** @type {Component<GroupProps>} */
 const Group = {
 	props: ['columns', 'startFixed', 'source'],
 	setup(props, ctx) {

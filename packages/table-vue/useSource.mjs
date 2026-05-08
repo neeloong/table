@@ -1,3 +1,5 @@
+/** @import { Ref, ComputedRef, Raw } from 'vue' */
+
 import { markRaw } from 'vue';
 import { unref, watch } from 'vue';
 
@@ -7,10 +9,10 @@ import useDestroyable from './useDestroyable.mjs';
 
 /**
  * 
- * @param {object[] | import('vue').Ref<object[]>} [data] 
+ * @param {object[] | Ref<object[]>} [data] 
  * @param {object} [options] 
- * @param {boolean | import('vue').Ref<boolean>} [options.selectable] 
- * @returns {import('vue').ComputedRef<import('vue').Raw<Source> | undefined>}
+ * @param {boolean | Ref<boolean>} [options.selectable] 
+ * @returns {ComputedRef<Raw<Source> | undefined>}
  */
 export default function useSource(data, options) {
 	const source = useDestroyable(() => markRaw(new Source({

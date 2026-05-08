@@ -1,13 +1,18 @@
+/** @import { Ref, ComputedRef } from 'vue' */
+/** @import { Group, Source } from '@neeloong/table' */
+/** @import { VueColumn } from './types.mjs' */
+
+
 import { unref, watch } from 'vue';
 
 import useDestroyable from './useDestroyable.mjs';
 
 /**
  * 
- * @param {import('@neeloong/table').Source | import('vue').Ref<import('@neeloong/table').Source | undefined | null>} [source] 
- * @param {import('./types.mjs').VueColumn[] | import('vue').Ref<import('./types.mjs').VueColumn[]>} [columns] 
- * @param {number | import('vue').Ref<number | undefined>} [startFixed] 
- * @returns {import('vue').ComputedRef<import('@neeloong/table').Group | undefined>}
+ * @param {Source | Ref<Source | undefined | null>} [source] 
+ * @param {VueColumn[] | Ref<VueColumn[]>} [columns] 
+ * @param {number | Ref<number | undefined>} [startFixed] 
+ * @returns {ComputedRef<Group | undefined>}
  */
 export default function useGroup(source, columns, startFixed) {
 	const group = useDestroyable(() => {

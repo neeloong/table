@@ -1,3 +1,5 @@
+/** @import { Dot } from './types.mjs' */
+
 import date2n from './date2n.mjs';
 
 /**
@@ -39,7 +41,7 @@ function getIcon(icon) {
  * 
  * @param {any} data 
  * @param {(Date | null)[]} allDates 
- * @param {import('./types.mjs').Dot} dot 
+ * @param {Dot} dot 
  * @param {number} index 
  * @param {number} todayN 
  * @param {string} prefix 

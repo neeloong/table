@@ -1,12 +1,15 @@
+/** @import { Component } from 'vue' */
+/** @import { Group } from '@neeloong/table' */
+
 import { computed, ref, h } from 'vue';
 
 import useHeader from './useHeader.mjs';
 
 /**
  * @typedef {object} HeaderProps
- * @property {import('@neeloong/table').Group} [group]
+ * @property {Group} [group]
  */
-/** @type {import('vue').Component<HeaderProps>} */
+/** @type {Component<HeaderProps>} */
 const Header = {
 	props: ['group'],
 	setup(props) {

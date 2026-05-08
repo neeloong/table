@@ -1,13 +1,16 @@
+/** @import { Cell } from '../types/Row.mjs' */
+/** @import { ColumnCell, RowValue, Listener, RowApi } from '../types/index.mjs' */
+
 import noop from '../utils/noop.mjs';
 
 /**
  * 
- * @param {import('../types/index.mjs').RowApi} rowApi 
- * @param {import('../types/index.mjs').RowValue} row 
- * @param {import('../types/index.mjs').ColumnCell} column 
+ * @param {RowApi} rowApi 
+ * @param {RowValue} row 
+ * @param {ColumnCell} column 
  * @param {number} index 
  * @param {() => void} destroy 
- * @returns {import('../types/Row.mjs').Cell}
+ * @returns {Cell}
  */
 export default function createCell(rowApi, row, column, index, destroy) {
 	const { render, field } = column;
@@ -22,7 +25,7 @@ export default function createCell(rowApi, row, column, index, destroy) {
 		/**
 		 * 
 		 * @param {string | symbol} k 
-		 * @param {import('../types/index.mjs').Listener<any>} fn 
+		 * @param {Listener<any>} fn 
 		 * @returns 
 		 */
 		listen: (k, fn) => {

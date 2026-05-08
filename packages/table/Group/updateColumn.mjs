@@ -1,6 +1,8 @@
+/** @import { ColumnCell } from '../types/index.mjs' */
+
 /**
  * 
- * @param {import('../types/index.mjs').ColumnCell[]} columns 
+ * @param {ColumnCell[]} columns 
  * @param {number} startFixed 
  * @returns 
  */

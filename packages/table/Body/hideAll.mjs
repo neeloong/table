@@ -1,8 +1,10 @@
+/** @import { RowDataProxy } from '../types/Row.mjs' */
+
 import hideRow from './hideRow.mjs';
 
 /**
  * 
- * @param {import('../types/Row.mjs').RowDataProxy[]} list 
+ * @param {RowDataProxy[]} list 
  * @returns 
  */
 export default function hideAll(list) {

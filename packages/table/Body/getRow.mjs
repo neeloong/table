@@ -1,6 +1,8 @@
+/** @import { Row, RowDataProxy } from '../types/Row.mjs' */
+
 /**
  * 
- * @param {import('../types/Row.mjs').Row} row 
+ * @param {Row} row 
  * @returns 
  */
 function getElMap(row) {
@@ -12,7 +14,7 @@ function getElMap(row) {
 }
 /**
  * 
- * @param {import('../types/Row.mjs').Row} row 
+ * @param {Row} row 
  * @param {any} key 
  * @returns 
  */
@@ -23,15 +25,15 @@ function getProxy(row, key) {
 		proxy.index = row.index;
 		return proxy;
 	}
-	/** @type {import('../types/Row.mjs').RowDataProxy} */
+	/** @type {RowDataProxy} */
 	const elProxy = row.createProxy();
 	elMap.set(key, elProxy);
 	return elProxy;
 }
 /**
  * 
- * @param {import('../types/Row.mjs').Row[]} list 
- * @param {Map<string | number | symbol, import('../types/Row.mjs').Row>} map 
+ * @param {Row[]} list 
+ * @param {Map<string | number | symbol, Row>} map 
  * @param {number[]} visible 
  * @param {number} rStart 
  * @param {number} rEnd 
@@ -39,7 +41,7 @@ function getProxy(row, key) {
  * @returns 
  */
 export default function getRow(list, map, visible, rStart, rEnd, key) {
-	/** @type {Set<import('../types/Row.mjs').RowDataProxy>} */
+	/** @type {Set<RowDataProxy>} */
 	const needShowRow = new Set();
 	for (let i = rStart; i <= rEnd; i++) {
 		let index = visible[i];

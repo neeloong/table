@@ -1,5 +1,8 @@
+/** @import { RowValue } from '@neeloong/table' */
+/** @import { DateGetter, Dot } from './types.mjs' */
+
 /**
- * @typedef {import('./types.mjs').Dot & {date: import('./types.mjs').DateGetter;}} DotInfo
+ * @typedef {Dot & {date: DateGetter;}} DotInfo
  */
 /**
  * 
@@ -14,7 +17,7 @@ export function getDotDate(data, dateDate, endDateDate, dots) {
 }
 /**
  * 
- * @param {readonly import('@neeloong/table').RowValue[]} allData 
+ * @param {readonly RowValue[]} allData 
  * @param {Map<string | number, Record<string, Date | undefined>>} allDateData 
  * @param {Map<string | number, Record<string, Date | undefined>>} allEndDateData 
  * @param {DotInfo[]} dots 

@@ -1,6 +1,8 @@
+/** @import { Cell } from '../types/Row.mjs' */
+
 /**
  * 
- * @param {import('../types/Row.mjs').Cell} c 
+ * @param {Cell} c 
  */
 export default function showCell(c) {
 	const {column} = c;

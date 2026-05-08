@@ -140,13 +140,13 @@ function set2(e: PointerEvent) {
 	<div :class="$style.root">
 
 		<table :class="$style.container">
-			<tr :class="$style.header" ref="header1">
+			<thead :class="$style.header" ref="header1">
 				<Header :group="group" />
-			</tr>
-			<tr :class="$style.header" ref="header2">
+			</thead>
+			<thead :class="$style.header" ref="header2">
 				<Header :group="ganttGroup" />
 
-			</tr>
+			</thead>
 			<tbody :class="$style.body" ref="body1">
 
 				<Body :group="group" />

@@ -1,3 +1,6 @@
+/** @import { Cell, RowDataProxy } from '../types/Row.mjs' */
+/** @import { ColumnCell } from '../types/index.mjs' */
+
 import binarySearch from '../utils/binarySearch.mjs';
 import replaceShow from './replaceShow.mjs';
 import createCell from './createCell.mjs';
@@ -6,14 +9,14 @@ import hideCell from './hideCell.mjs';
 
 /**
  * 
- * @param {import('../types/Row.mjs').RowDataProxy} r 
+ * @param {RowDataProxy} r 
  * @param {string | number | symbol | undefined} hoverId 
  * @param {string | number | symbol | undefined} selectedId 
  * @param {Set<string | number | symbol>} checkedSet 
  * @param {number} startFixed 
  * @param {number[]} visible 
  * @param {number} rowHeight 
- * @param {import('../types/index.mjs').ColumnCell[]} columns 
+ * @param {ColumnCell[]} columns 
  * @param {number} cStart 
  * @param {number} cEnd 
  */
@@ -50,7 +53,7 @@ export default function showRow(
 	el.style.insetBlockStart = `${rowHeight * showIndex}px`;
 	el.style.blockSize = `${rowHeight}px`;
 
-	/** @type {Set<import('../types/Row.mjs').Cell>} */
+	/** @type {Set<Cell>} */
 	const needCells = new Set();
 	const startFixedMax = Math.min(startFixed, cStart);
 	/**

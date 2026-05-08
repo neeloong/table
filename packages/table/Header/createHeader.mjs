@@ -1,3 +1,5 @@
+/** @import { ColumnCell, ColumnComponent } from '../types/index.mjs' */
+
 import { verticalWritingMode } from '../verticalWritingMode.mjs';
 
 import pointerCapture from './pointerCapture.mjs';
@@ -15,8 +17,8 @@ import pointerCapture from './pointerCapture.mjs';
  * 
  * @param {() => void} requestRender 
  * @param {HTMLElement} header 
- * @param {import('../types/index.mjs').ColumnCell} column 
- * @returns {[import('../types/index.mjs').ColumnComponent, HTMLElement, ColumnState]}
+ * @param {ColumnCell} column 
+ * @returns {[ColumnComponent, HTMLElement, ColumnState]}
  */
 export default function createHeader(requestRender, header, column) {
 	const resize = document.createElement('span');

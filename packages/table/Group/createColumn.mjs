@@ -1,3 +1,5 @@
+/** @import { Api, ColumnInfo, ColumnUpdatable, ColumnCell, ColumnOptions, Extension } from '../types/index.mjs' */
+
 import { defaultWidth } from '../defaultConfig.mjs';
 import noop from '../utils/noop.mjs';
 
@@ -5,9 +7,9 @@ import createColumnFn from './createColumnFn.mjs';
 
 /**
  * 
- * @param {import('../types/index.mjs').Api} api 
- * @param {import('../types/index.mjs').ColumnOptions} options 
- * @param {import('../types/index.mjs').Extension[]} exFns 
+ * @param {Api} api 
+ * @param {ColumnOptions} options 
+ * @param {Extension[]} exFns 
  * @param {Record<string, any>} exOptions 
  * @param {() => void} requestRender 
  * @returns 
@@ -15,7 +17,7 @@ import createColumnFn from './createColumnFn.mjs';
 export default function createColumn(api, options, exFns, exOptions, requestRender) {
 	const [fn, updateExtensions, destroyExt] = createColumnFn(options, exFns, exOptions, api);
 
-	/** @type {import('../types/index.mjs').ColumnUpdatable} */
+	/** @type {ColumnUpdatable} */
 	const columnValue = {
 		width: 0, hidden: false,
 		resizable: false,
@@ -53,7 +55,7 @@ export default function createColumn(api, options, exFns, exOptions, requestRend
 	if (maxWidth) { columnValue.maxWidth = maxWidth; }
 
 	const {key} = options;
-	/** @type {import('../types/index.mjs').ColumnInfo} */
+	/** @type {ColumnInfo} */
 	const info = {
 		get key() { return key; },
 		get meta() { return meta; },
@@ -67,7 +69,7 @@ export default function createColumn(api, options, exFns, exOptions, requestRend
 		get hidden() { return columnValue.hidden; },
 
 	};
-	/** @type {import('../types/index.mjs').ColumnCell} */
+	/** @type {ColumnCell} */
 	const column = {
 		fixed: false,
 		options: options,

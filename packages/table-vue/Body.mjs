@@ -1,13 +1,16 @@
+/** @import { Component } from 'vue' */
+/** @import { Group } from '@neeloong/table' */
+
 import { computed, ref, watch, h } from 'vue';
 
 import useBody from './useBody.mjs';
 
 /**
  * @typedef {object} BodyProps
- * @property {import('@neeloong/table').Group} [group]
+ * @property {Group} [group]
  * @property {number} [rowHeight]
  */
-/** @type {import('vue').Component<BodyProps>} */
+/** @type {Component<BodyProps>} */
 const Body = {
 	props: ['group', 'rowHeight'],
 	setup(props) {

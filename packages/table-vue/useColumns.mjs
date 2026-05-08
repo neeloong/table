@@ -1,14 +1,18 @@
+/** @import { Ref, Component, ComputedRef, ShallowReactive, VNode } from 'vue' */
+/** @import { CellComponent, CellParam, ColumnOptions } from '@neeloong/table' */
+/** @import { VueColumn } from './types.mjs' */
+
 import { computed, shallowReactive, unref, Teleport, h, KeepAlive, ref } from 'vue';
 
 
 /**
  * 
- * @param {import('vue').VNode[]} list 
+ * @param {VNode[]} list 
  * @param {any} component 
- * @param {import('@neeloong/table').CellParam} param 
+ * @param {CellParam} param 
  * @param {string} key 
  * @param {string} [className] 
- * @returns {import('@neeloong/table').CellComponent}
+ * @returns {CellComponent}
  */
 function create(
 	list,
@@ -51,18 +55,18 @@ function create(
 }
 /**
  * 
- * @param {import('./types.mjs').VueColumn[] | undefined | import('vue').Ref<import('./types.mjs').VueColumn[] | undefined>} [columns] 
- * @returns {[import('vue').ComputedRef<import('@neeloong/table').ColumnOptions[]>, import('vue').Component]}
+ * @param {VueColumn[] | undefined | Ref<VueColumn[] | undefined>} [columns] 
+ * @returns {[ComputedRef<ColumnOptions[]>, Component]}
  */
 export default function useColumns(columns) {
 	let id = 0;
-	/** @type {import('vue').ShallowReactive<import('vue').VNode[]>} */
+	/** @type {ShallowReactive<VNode[]>} */
 	const list = shallowReactive([]);
 	const renderTo = document.createElement('tbody');
 	/**
 	 * 
-	 * @param {import('./types.mjs').VueColumn} column 
-	 * @returns {import('@neeloong/table').ColumnOptions}
+	 * @param {VueColumn} column 
+	 * @returns {ColumnOptions}
 	 */
 	function toColumnOptions({ render, component, class: className, ...v }) {
 		return {
@@ -72,7 +76,7 @@ export default function useColumns(columns) {
 				: render,
 		};
 	}
-	/** @type {import('vue').ComputedRef<import('@neeloong/table').ColumnOptions[]>} */
+	/** @type {ComputedRef<ColumnOptions[]>} */
 	const data = computed(() => unref(columns)?.map(toColumnOptions) || []);
 	function render() {
 		return h(Teleport, { to: renderTo }, [...list]);

@@ -1,9 +1,12 @@
+/** @import { Line, LineMeta } from './types.mjs' */
+
 import date2n from './date2n.mjs';
+
 /**
  * 
  * @param {any} data 
- * @param {([Date, Date | null, (import('./types.mjs').LineMeta | undefined)?] | null)[]} allDates 
- * @param {import('./types.mjs').Line} line 
+ * @param {([Date, Date | null, (LineMeta | undefined)?] | null)[]} allDates 
+ * @param {Line} line 
  * @param {number} index 
  * @param {number} todayN 
  * @param {string} prefix 

@@ -1,3 +1,5 @@
+/** @import { Api, CellComponent, CellParam, CellUpdate, ColumnComponent, ColumnParam, Extension } from '../types/index.mjs' */
+
 const styles = {
 	collapsible: 'neeloong-table-tree-collapsible',
 	collapser: 'neeloong-table-tree-collapser',
@@ -5,8 +7,8 @@ const styles = {
 };
 /**
  * 
- * @param {(param: import('../types/index.mjs').CellParam) => import('../types/index.mjs').CellComponent} render 
- * @returns {(param: import('../types/index.mjs').CellParam) => import('../types/index.mjs').CellComponent}
+ * @param {(param: CellParam) => CellComponent} render 
+ * @returns {(param: CellParam) => CellComponent}
  */
 function createRender(render) {
 	return p => {
@@ -33,7 +35,7 @@ function createRender(render) {
 
 		/**
 		 * 
-		 * @param {import('../types/index.mjs').CellUpdate} row 
+		 * @param {CellUpdate} row 
 		 */
 		function updateCollapser(row) {
 			root.style.setProperty(`--neeloong-table-tree-level`, String(row.level));
@@ -58,9 +60,9 @@ function createRender(render) {
 
 /**
  * 
- * @param {import('../types/index.mjs').Api} api 
- * @param {(param: import('../types/index.mjs').ColumnParam) => import('../types/index.mjs').ColumnComponent} header 
- * @returns {(param: import('../types/index.mjs').ColumnParam) => import('../types/index.mjs').ColumnComponent}
+ * @param {Api} api 
+ * @param {(param: ColumnParam) => ColumnComponent} header 
+ * @returns {(param: ColumnParam) => ColumnComponent}
  */
 function createHeader(api, header) {
 	return p => {
@@ -84,7 +86,7 @@ function createHeader(api, header) {
 		};
 	};
 }
-/** @type {import('../types/index.mjs').Extension} */
+/** @type {Extension} */
 const Tree = (_, update, api, next) => {
 	const cc = next(update);
 	return {

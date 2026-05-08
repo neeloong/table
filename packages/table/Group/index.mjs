@@ -1,3 +1,7 @@
+/** @import { Row } from '../types/Row.mjs' */
+/** @import { Api, ColumnCell, ColumnOptions, RowValue } from '../types/index.mjs' */
+/** @import Source from '../Source/index.mjs' */
+
 import Body from '../Body/index.mjs';
 import Header from '../Header/index.mjs';
 
@@ -6,7 +10,7 @@ import createColumns from './createColumns.mjs';
 
 
 export default class Group {
-	/** @type {import('../types/index.mjs').Api} */
+	/** @type {Api} */
 	#api;
 	#startFixed = 0;
 	get startFixed() { return this.#startFixed; }
@@ -17,14 +21,14 @@ export default class Group {
 	}
 	/** @type {() => void} */
 	#remove;
-	/** @type {() => readonly import('../types/index.mjs').RowValue[]} */
+	/** @type {() => readonly RowValue[]} */
 	#getData;
 	/** @type {() => void} */
 	#requestRender;
 	/**
 	 * 
-	 * @param {import('../Source/index.mjs').default} source 
-	 * @param {() => readonly import('../types/index.mjs').RowValue[]} getData 
+	 * @param {Source} source 
+	 * @param {() => readonly RowValue[]} getData 
 	 * @param {() => void} remove 
 	 */
 	constructor(
@@ -104,12 +108,12 @@ export default class Group {
 		this.requestRender(area);
 		return area;
 	}
-	/** @type {import('../types/index.mjs').ColumnCell[]} */
+	/** @type {ColumnCell[]} */
 	#columns = [];
 	get columns() { return this.#columns; }
 	/**
 	 * 
-	 * @param {import('../types/index.mjs').RowValue[]} data 
+	 * @param {RowValue[]} data 
 	 */
 	_updateData(data) {
 		this.#hide();
@@ -119,7 +123,7 @@ export default class Group {
 	}
 	/**
 	 * 
-	 * @param {import('../types/index.mjs').ColumnOptions[]} [v] 
+	 * @param {ColumnOptions[]} [v] 
 	 * @returns 
 	 */
 	setColumns(v) {
@@ -190,8 +194,8 @@ export default class Group {
 	#headers = new Set();
 	/**
 	 * 
-	 * @param {import('../types/Row.mjs').Row[]} rowData 
-	 * @param {Map<string | number | symbol, import('../types/Row.mjs').Row>} rowMap 
+	 * @param {Row[]} rowData 
+	 * @param {Map<string | number | symbol, Row>} rowMap 
 	 * @param {number[]} visibleRowIndexes 
 	 * @param {string | number | undefined} hoverId 
 	 * @param {string | number | symbol | undefined} selectedId 

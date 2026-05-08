@@ -1,13 +1,15 @@
+/** @import { Api, ColumnCell, ColumnOptions, RowValue } from '../types/index.mjs' */
+
 import getExtensionList from './getExtensionList.mjs';
 import createColumn from './createColumn.mjs';
 
 /**
  * 
  * @param {() => void} requestRender 
- * @param {import('../types/index.mjs').Api} api 
- * @param {import('../types/index.mjs').ColumnCell[]} oldColumns 
- * @param {readonly import('../types/index.mjs').RowValue[]} data 
- * @param {import('../types/index.mjs').ColumnOptions[]} [columns] 
+ * @param {Api} api 
+ * @param {ColumnCell[]} oldColumns 
+ * @param {readonly RowValue[]} data 
+ * @param {ColumnOptions[]} [columns] 
  * @returns 
  */
 export default function createColumns(
@@ -17,7 +19,7 @@ export default function createColumns(
 	data,
 	columns = [],
 ) {
-	/** @type {import('../types/index.mjs').ColumnCell[]} */
+	/** @type {ColumnCell[]} */
 	const list = [];
 
 	for (const c of columns) {

@@ -1,7 +1,7 @@
-
+/** @import { DateGetter, Line, LineMeta } from './types.mjs' */
 
 /**
- * @typedef {import('./types.mjs').Line & {	start: import('./types.mjs').DateGetter; end: import('./types.mjs').DateGetter; }} LineInfo
+ * @typedef {Line & {	start: DateGetter; end: DateGetter; }} LineInfo
  */
 /**
  * 
@@ -12,7 +12,7 @@
  * @returns 
  */
 export default function getLineDates(data, dateDate, endDateDate, lines) {
-	/** @type {([Date, Date | null, import('./types.mjs').LineMeta?] | null)[]} */
+	/** @type {([Date, Date | null, LineMeta?] | null)[]} */
 	const dates = lines.map(({ start, end, meta }) => {
 		let s = start(data, dateDate, endDateDate);
 		if (!s) { return null; }

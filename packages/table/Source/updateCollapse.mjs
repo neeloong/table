@@ -1,7 +1,9 @@
+/** @import { Row } from '../types/Row.mjs' */
+
 import binarySearch from '../utils/binarySearch.mjs';
 /**
  * 
- * @param {import('../types/Row.mjs').Row} row 
+ * @param {Row} row 
  * @param {Set<string | number | symbol>} expanded 
  * @returns {Iterable<number>}
  */
@@ -14,8 +16,8 @@ function* getList(row, expanded) {
 }
 /**
  * 
- * @param {import('../types/Row.mjs').Row} row 
- * @param {Map<string | number | symbol, import('../types/Row.mjs').Row>} rowMap 
+ * @param {Row} row 
+ * @param {Map<string | number | symbol, Row>} rowMap 
  * @param {Set<string | number | symbol>} expanded 
  * @returns 
  */
@@ -30,9 +32,9 @@ export function rowVisible(row, rowMap, expanded) {
 
 /**
  * 
- * @param {import('../types/Row.mjs').Row} row 
+ * @param {Row} row 
  * @param {boolean} closed 
- * @param {Map<string | number | symbol, import('../types/Row.mjs').Row>} rowMap 
+ * @param {Map<string | number | symbol, Row>} rowMap 
  * @param {Set<string | number>} expanded 
  * @param {number[]} visible 
  * @returns 

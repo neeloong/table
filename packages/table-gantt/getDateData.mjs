@@ -1,3 +1,5 @@
+/** @import { RowValue } from '@neeloong/table' */
+
 /**
  * 
  * @param {any} data 
@@ -10,7 +12,7 @@ export function getDate(data, dateFields) {
 
 /**
  * 
- * @param {readonly import('@neeloong/table').RowValue[]} allData 
+ * @param {readonly RowValue[]} allData 
  * @param {[string, (v: any) => Date | undefined][]} dateFields 
  * @returns {Map<number | string, Record<string, Date | undefined>>}
  */

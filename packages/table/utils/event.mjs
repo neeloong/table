@@ -1,7 +1,9 @@
+/** @import { EventContext, Listen, Listener, Emit, EmitOption } from '../types/index.mjs' */
+
 /**
- * @param {Record<string | symbol, Set<(v: any, ctx: import('../types/index.mjs').EventContext) => void>>} events
+ * @param {Record<string | symbol, Set<(v: any, ctx: EventContext) => void>>} events
  * @param {any} key
- * @returns {Set<(v: any, ctx: import('../types/index.mjs').EventContext) => void>}
+ * @returns {Set<(v: any, ctx: EventContext) => void>}
  */
 function get(events, key) {
 	let set = key in events && events[key];
@@ -12,19 +14,19 @@ function get(events, key) {
 }
 /**
  * @template {object} T
- * @param {Record<string | symbol, Set<(v: any, ctx: import('../types/index.mjs').EventContext) => void>>} events
- * @returns {import('../types/index.mjs').Listen<T>}
+ * @param {Record<string | symbol, Set<(v: any, ctx: EventContext) => void>>} events
+ * @returns {Listen<T>}
  */
 export function createListen(events) {
 	/**
 	 * 
 	 * @param {any} key 
-	 * @param {import('../types/index.mjs').Listener<any>} fn 
+	 * @param {Listener<any>} fn 
 	 * @returns 
 	 */
 	return (key, fn) => {
 		const set = get(events, key);
-		/** @type {(v: any, ctx: import('../types/index.mjs').EventContext) => void} */
+		/** @type {(v: any, ctx: EventContext) => void} */
 		const f = (...v) => fn(...v);
 		set.add(f);
 		return () => { set.delete(f); };
@@ -33,15 +35,15 @@ export function createListen(events) {
 
 /**
  * @template {object} T
- * @param {Record<string | symbol, Set<(v: any, ctx: import('../types/index.mjs').EventContext) => boolean>>} events
- * @returns {import('../types/index.mjs').Emit<T>}
+ * @param {Record<string | symbol, Set<(v: any, ctx: EventContext) => boolean>>} events
+ * @returns {Emit<T>}
  */
 export function createEmit(events) {
 	/**
 	 * 
 	 * @param {any} key 
 	 * @param {any} value 
-	 * @param {import('../types/index.mjs').EmitOption} [opt] 
+	 * @param {EmitOption} [opt] 
 	 * @returns 
 	 */
 	return (key, value, opt) => {
@@ -51,7 +53,7 @@ export function createEmit(events) {
 		let prevented = true;
 		let stop = false;
 		const cancelable = Boolean(opt?.cancelable);
-		/** @type {import('../types/index.mjs').EventContext} */
+		/** @type {EventContext} */
 		const ctx = {
 			stop() { stop = true; },
 			prevent() { prevented = true; },

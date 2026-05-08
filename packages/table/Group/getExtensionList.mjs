@@ -1,7 +1,9 @@
-/** @typedef {[import('../types/index.mjs').Extension, Record<string, any>][]} ExtensionList */
+/** @import { Extension, ExtensionOption } from '../types/index.mjs' */
+
+/** @typedef {[Extension, Record<string, any>][]} ExtensionList */
 /**
  * 
- * @param {import('../types/index.mjs').ExtensionOption | import('../types/index.mjs').ExtensionOption[]} [extensions] 
+ * @param {ExtensionOption | ExtensionOption[]} [extensions] 
  * @returns {ExtensionList}
  */
 export default function getExtensionList(extensions) {
