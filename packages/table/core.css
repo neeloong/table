@@ -168,7 +168,6 @@ th.neeloong-table-header, td.neeloong-table-header {
 	display: flex;
 	flex-direction: row;
 	box-sizing: border-box;
-	display: block;
 }
 
 .neeloong-table-cell {

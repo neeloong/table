@@ -21,7 +21,7 @@ const Body = {
 			if (!current || !rowHeight) { return; }
 			current.rowHeight = rowHeight;
 		});
-		return () => h('tbody', { ref: root });
+		return () => h('table', { ref: root });
 	},
 };
 

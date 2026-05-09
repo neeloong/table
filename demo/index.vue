@@ -129,39 +129,39 @@ function set2(e: PointerEvent) {
 	<select v-model="key">
 		<option v-for="[v, l] in list" :value="v">{{ l }}</option>
 	</select>
-	<table>
-		<Group #default="{group}" :source="source" :columns="[...baseColumns, ganttColumn]">
-			111
-			<Header :group="group"  :class="$style.header" />
-			222
-			<Body :group="group" />
-			3333
-		</Group>
-	</table>
+	<Group #default="{ group }" :source="source" :columns="[...baseColumns, ganttColumn]">
+		111
+		<Header :group="group" :class="$style.header" />
+		222
+
+		<Body :group="group" />
+		3333
+	</Group>
 	<div :class="$style.root">
 
-		<table :class="$style.container">
-			<thead :class="$style.header" ref="header1">
+		<div :class="$style.container">
+			<div :class="$style.header" ref="header1">
 				<Header :group="group" />
-			</thead>
-			<thead :class="$style.header" ref="header2">
+			</div>
+			<div :class="$style.header" ref="header2">
 				<Header :group="ganttGroup" />
 
-			</thead>
-			<tbody :class="$style.body" ref="body1">
+			</div>
+			<div :class="$style.body" ref="body1">
 
 				<Body :group="group" />
 
-			</tbody>
-			<tbody :class="$style.body" ref="body2">
+			</div>
+			<div :class="$style.body" ref="body2">
+
 
 				<Body :group="ganttGroup" />
 
-			</tbody>
+			</div>
 			<span :class="$style.scrollbar" @pointermove="set1" @pointerdown="p1" @pointercancel="c" @pointerup="c" />
 			<span :class="$style.scrollbar" @pointermove="set2" @pointerdown="p2" @pointercancel="c" @pointerup="c" />
 
-		</table>
+		</div>
 	</div>
 	<CellRenderer />
 	<GanttCellRenderer />
@@ -189,7 +189,7 @@ body {
 .header {
 
 	overflow: scroll;
-	position: sticky!important;
+	position: sticky !important;
 	inset-block-start: 0;
 	z-index: 100;
 
@@ -199,6 +199,7 @@ body {
 
 	}
 }
+
 .body {
 	overflow: scroll;
 

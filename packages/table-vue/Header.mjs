@@ -16,7 +16,7 @@ const Header = {
 		const root = ref();
 		useHeader(root, computed(() => props.group));
 
-		return () => h('tr', { ref: root });
+		return () => h('table', h('thead', h('tr', { ref: root })));
 	},
 };
 
