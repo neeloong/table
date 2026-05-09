@@ -1,6 +1,7 @@
 /** @import { Cell } from '../types/Row.mjs' */
 /** @import { ColumnCell, RowValue, Listener, RowApi } from '../types/index.mjs' */
 
+import { getKey } from '../createKey.mjs';
 import noop from '../utils/noop.mjs';
 
 /**
@@ -20,7 +21,7 @@ export default function createCell(rowApi, row, column, index, destroy) {
 	const { listen } = rowApi;
 
 	const comp = render({
-		...row, value: field ? row.data?.[field] : undefined,
+		...row, value: getKey(row.data, field),
 	}, Object.assign(Object.create(rowApi), {
 		/**
 		 * 
@@ -51,7 +52,7 @@ export default function createCell(rowApi, row, column, index, destroy) {
 		},
 		setHidden: comp.setHidden.bind(comp),
 		update(row) {
-			comp.update({ ...row, value: field ? row.data?.[field] : undefined });
+			comp.update({ ...row, value: getKey(row.data, field) });
 		},
 	};
 }

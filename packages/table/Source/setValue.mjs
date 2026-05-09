@@ -1,21 +1,21 @@
 /** @import { Row, RowDataProxy } from '../types/Row.mjs' */
-/** @import { Emit, IdKey, Key, Listen, RowApi, RowEventMap } from '../types/index.mjs' */
+/** @import { Emit, Id, IdKey, Key, Listen, RowApi, RowEventMap } from '../types/index.mjs' */
 /** @import Source from './index.mjs' */
 
 import createKey, { createIdKey } from '../createKey.mjs';
 
-/** @typedef {[string | number, any, string | number | undefined]} RowInfo */
+/** @typedef {[id: Id, data: any, parentId: Id | undefined]} RowInfo */
 /**
  * 
  * @param {any[]} rows 
- * @param {(v: any) => string | number} idKey 
- * @param {(v: any) => string | number | undefined} parentKey 
+ * @param {(v: any) => Id} idKey 
+ * @param {(v: any) => Id | undefined} parentKey 
  * @returns {RowInfo[]}
  */
 function unique(rows, idKey, parentKey) {
 	/** @type {RowInfo[]} */
 	const list = [];
-	/** @type {Map<string | number, RowInfo>} */
+	/** @type {Map<Id, RowInfo>} */
 	const map = new Map();
 	for (const value of rows || []) {
 		const id = idKey(value);
@@ -40,7 +40,7 @@ function toTree(rows) {
 	const ids = new Set(rows.map(v => v[0]));
 	/** @type {RowInfo[]} */
 	const root = [];
-	/** @type {Map<string | number, RowInfo[]>} */
+	/** @type {Map<Id, RowInfo[]>} */
 	const map = new Map();
 	for (const row of rows) {
 		const parentId = row[2];
@@ -107,7 +107,7 @@ function createRowEl(setSelected) {
 /**
  * 
  * @param {Source} source 
- * @param {string | number} id 
+ * @param {Id} id 
  * @param {HTMLDivElement} el 
  * @param {Listen<RowEventMap>} listen 
  * @param {Emit<RowEventMap>} emit 
@@ -132,22 +132,22 @@ function createRowApi(source, id, el, listen, emit) {
  * @template {object} T
  * @param {Source} source 
  * @param {object[]} rows 
- * @param {(id?: string | number) => void} setHover 
- * @param {Map<string | number | symbol, Row>} oldMap 
+ * @param {(id?: Id) => void} setHover 
+ * @param {Map<Id, Row>} oldMap 
  * @param {IdKey<T>} [idKey] 
- * @param {Key<string | number, T>} [parentKey] 
- * @returns {[Row[], Map<string | number | symbol, Row>]}
+ * @param {Key<Id, T>} [parentKey] 
+ * @returns {[Row[], Map<Id, Row>]}
  */
 export default function setValue(source, rows, setHover, oldMap, idKey, parentKey) {
 	const infoList = toTree(unique(rows, createIdKey(idKey), createKey(parentKey)));
 	/** @type {Row[]} */
 	const list = [];
-	/** @type {Map<string | number | symbol, Row>} */
+	/** @type {Map<Id, Row>} */
 	const map = new Map();
 
 	/** @type {Set<Row>} */
 	const updatedRow = new Set();
-	/** @type {(string | number)[]} */
+	/** @type {(Id)[]} */
 	const ancestorIds = [];
 	/** @type {Row[]} */
 	const ancestors = [];

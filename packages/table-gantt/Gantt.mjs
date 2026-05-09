@@ -1,4 +1,4 @@
-/** @import { Extension, ExtensionOption, RowValue } from '@neeloong/table' */
+/** @import { Extension, ExtensionOption, Id, RowValue } from '@neeloong/table' */
 /** @import { DotInfo } from './getDotData.mjs' */
 /** @import { LineInfo } from './getLineDates.mjs' */
 /** @import { Options, LineMeta } from './types.mjs' */
@@ -60,13 +60,13 @@ const Gantt = (options, update, api, next, colOpt) => {
 	const headers = new Set();
 	/** @type {Set<() => void>} */
 	const cells = new Set();
-	/** @type {Map<number | string, ([Date, Date | null, LineMeta?] | null)[]>} */
+	/** @type {Map<Id, ([Date, Date | null, LineMeta?] | null)[]>} */
 	let allLineData = new Map();
-	/** @type {Map<number | string, Record<string, Date | undefined>>} */
+	/** @type {Map<Id, Record<string, Date | undefined>>} */
 	let allDateData = new Map();
-	/** @type {Map<number | string, Record<string, Date | undefined>>} */
+	/** @type {Map<Id, Record<string, Date | undefined>>} */
 	let allEndDateData = new Map();
-	/** @type {Map<number | string, (Date | null)[]>} */
+	/** @type {Map<Id, (Date | null)[]>} */
 	let allDotData = new Map();
 
 	// const varPrefix = `gantt-${`${Math.random()}`.substring(2)}`

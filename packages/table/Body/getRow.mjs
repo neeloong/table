@@ -1,4 +1,5 @@
 /** @import { Row, RowDataProxy } from '../types/Row.mjs' */
+/** @import { Id } from '../types/options.mjs' */
 
 /**
  * 
@@ -33,7 +34,7 @@ function getProxy(row, key) {
 /**
  * 
  * @param {Row[]} list 
- * @param {Map<string | number | symbol, Row>} map 
+ * @param {Map<Id, Row>} map 
  * @param {number[]} visible 
  * @param {number} rStart 
  * @param {number} rEnd 

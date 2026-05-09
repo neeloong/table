@@ -3,6 +3,7 @@ import type {Emit, Listen, RowEventMap} from "./event.mjs";
 
 import type {Column} from './column.mjs';
 import type {ColumnCell} from './ColumnCell';
+import type { Id } from './options.mjs';
 
 export interface Cell {
 	el: HTMLElement;
@@ -25,12 +26,12 @@ export interface RowDataProxy {
 export interface Row {
 	elMap?: Map<any, RowDataProxy>,
 	index: number;
-	parentId: number | symbol | string | undefined;
+	parentId: Id | undefined;
 	value: RowValue;
 	listen: Listen<RowEventMap>;
 	emit: Emit<RowEventMap>;
 
-	id: string | number | symbol;
+	id: Id;
 	children: Row[];
 	descendants: Row[];
 	createProxy(): RowDataProxy;

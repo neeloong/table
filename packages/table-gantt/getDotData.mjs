@@ -1,4 +1,4 @@
-/** @import { RowValue } from '@neeloong/table' */
+/** @import { Id, RowValue } from '@neeloong/table' */
 /** @import { DateGetter, Dot } from './types.mjs' */
 
 /**
@@ -18,12 +18,12 @@ export function getDotDate(data, dateDate, endDateDate, dots) {
 /**
  * 
  * @param {readonly RowValue[]} allData 
- * @param {Map<string | number, Record<string, Date | undefined>>} allDateData 
- * @param {Map<string | number, Record<string, Date | undefined>>} allEndDateData 
+ * @param {Map<Id, Record<string, Date | undefined>>} allDateData 
+ * @param {Map<Id, Record<string, Date | undefined>>} allEndDateData 
  * @param {DotInfo[]} dots 
  * @param {Date} todayStart 
  * @param {Date} todayEnd 
- * @returns {[Date, Date, Map<number | string, (Date | null)[]>]}
+ * @returns {[Date, Date, Map<Id, (Date | null)[]>]}
  */
 export default function getDotData(
 	allData,
@@ -35,7 +35,7 @@ export default function getDotData(
 ) {
 	let dotStartDate = todayStart;
 	let dotEndDate = todayEnd;
-	/** @type {Map<number | string, (Date | null)[]>} */
+	/** @type {Map<Id, (Date | null)[]>} */
 	const allDotData = new Map();
 	for (const { id, data } of allData) {
 		const dates = getDotDate(data, allDateData.get(id) || {}, allEndDateData.get(id) || {}, dots);

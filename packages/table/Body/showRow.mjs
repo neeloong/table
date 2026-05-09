@@ -1,5 +1,5 @@
 /** @import { Cell, RowDataProxy } from '../types/Row.mjs' */
-/** @import { ColumnCell } from '../types/index.mjs' */
+/** @import { ColumnCell, Id } from '../types/index.mjs' */
 
 import binarySearch from '../utils/binarySearch.mjs';
 import replaceShow from './replaceShow.mjs';
@@ -10,9 +10,9 @@ import hideCell from './hideCell.mjs';
 /**
  * 
  * @param {RowDataProxy} r 
- * @param {string | number | symbol | undefined} hoverId 
- * @param {string | number | symbol | undefined} selectedId 
- * @param {Set<string | number | symbol>} checkedSet 
+ * @param {Id | undefined} hoverId 
+ * @param {Id | undefined} selectedId 
+ * @param {Set<Id>} checkedSet 
  * @param {number} startFixed 
  * @param {number[]} visible 
  * @param {number} rowHeight 

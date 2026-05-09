@@ -1,10 +1,11 @@
 /** @import { Row } from '../types/Row.mjs' */
+/** @import { Id } from '../types/options.mjs' */
 
 import binarySearch from '../utils/binarySearch.mjs';
 /**
  * 
  * @param {Row} row 
- * @param {Set<string | number | symbol>} expanded 
+ * @param {Set<Id>} expanded 
  * @returns {Iterable<number>}
  */
 function* getList(row, expanded) {
@@ -17,8 +18,8 @@ function* getList(row, expanded) {
 /**
  * 
  * @param {Row} row 
- * @param {Map<string | number | symbol, Row>} rowMap 
- * @param {Set<string | number | symbol>} expanded 
+ * @param {Map<Id, Row>} rowMap 
+ * @param {Set<Id>} expanded 
  * @returns 
  */
 export function rowVisible(row, rowMap, expanded) {
@@ -34,8 +35,8 @@ export function rowVisible(row, rowMap, expanded) {
  * 
  * @param {Row} row 
  * @param {boolean} closed 
- * @param {Map<string | number | symbol, Row>} rowMap 
- * @param {Set<string | number>} expanded 
+ * @param {Map<Id, Row>} rowMap 
+ * @param {Set<Id>} expanded 
  * @param {number[]} visible 
  * @returns 
  */

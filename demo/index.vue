@@ -10,6 +10,7 @@ import ganttTooltip from './ganttTooltip';
 import rows from './data'
 import baseColumns from './columns';
 import units from './units';
+import { id, parent } from './symbol.mts';
 
 const dotDefines: GanttDot[] = [];
 const lineDefines: GanttLine[] = [{
@@ -49,8 +50,8 @@ const ganttColumn = computed<VueColumn>(() => {
 	}
 })
 const table = markRaw(new Source({
-	idKey: 'name',
-	parentKey: 'parent',
+	idKey: [id],
+	parentKey: parent,
 }));
 table.selectable = true
 const source = ref(table)

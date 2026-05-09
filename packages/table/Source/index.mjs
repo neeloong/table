@@ -1,5 +1,5 @@
 /** @import { Row } from '../types/Row.mjs' */
-/** @import { ColumnOptions, Emit, EventContext, EventMap, IdKey, Key, Listen, Options, RowEmit, RowEventMap, RowListen, RowValue } from '../types/index.mjs' */
+/** @import { ColumnOptions, Emit, EventContext, EventMap, Id, IdKey, Key, Listen, Options, RowEmit, RowEventMap, RowListen, RowValue } from '../types/index.mjs' */
 
 import Group from '../Group/index.mjs';
 import { isEq } from '../utils/isEq.mjs';
@@ -12,16 +12,16 @@ import setValue from './setValue.mjs';
 export default class Source {
 	/** @type {Row[]} */
 	#rowData = [];
-	/** @type {Map<string | number | symbol, Row>} */
+	/** @type {Map<Id, Row>} */
 	#rowMap = new Map();
 	/** @type {IdKey<object> | undefined} */
 	#idKey;
-	/** @type {Key<string | number, object> | undefined} */
+	/** @type {Key<Id, object> | undefined} */
 	#parentKey;
 	/** @type {number[]} */
 	#visibleRowIndexes = [];
 
-	/** @type {Map<string | number, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} */
+	/** @type {Map<Id, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} */
 	#rowEvents = new Map();
 	/** @readonly @type {RowEmit<RowEventMap>} */
 	emitRow = createEmitRow(this.#rowEvents);
@@ -53,7 +53,7 @@ export default class Source {
 
 	}
 	paused = false;
-	/** @type {number | string | symbol | undefined} */
+	/** @type {Id | undefined} */
 	#selectedId;
 	get selectedId() { return this.#selectedId; }
 	set selectedId(v) {
@@ -72,7 +72,7 @@ export default class Source {
 	}
 	/**
 	 * 
-	 * @param {number | string | symbol} id 
+	 * @param {Id} id 
 	 * @returns 
 	 */
 	toggleSelected(id) {
@@ -91,17 +91,17 @@ export default class Source {
 	}
 
 
-	/** @type {(number | string | symbol)[]} */
+	/** @type {(Id)[]} */
 	#checkedList = [];
-	/** @type {Set<number | string | symbol>} */
+	/** @type {Set<Id>} */
 	#checkedSet = new Set();
 	#allChecked = false;
 	get checked() { return [...this.#checkedList]; }
 	set checked(v) {
-		/** @type {Set<number | string | symbol>} */
+		/** @type {Set<Id>} */
 		const had = new Set();
 		const rowMap = this.#rowMap;
-		/** @type {(number | string | symbol)[]} */
+		/** @type {(Id)[]} */
 		const newList = [];
 		for (const k of v) {
 			if (had.has(k)) { continue; }
@@ -128,7 +128,7 @@ export default class Source {
 	}
 	/**
 	 * 
-	 * @param {string | number} id 
+	 * @param {Id} id 
 	 * @returns 
 	 */
 	isChecked(id) {
@@ -136,7 +136,7 @@ export default class Source {
 	}
 	/**
 	 * 
-	 * @param {string | number} id 
+	 * @param {Id} id 
 	 * @param {boolean} [checked] 
 	 * @returns 
 	 */
@@ -194,9 +194,9 @@ export default class Source {
 		}
 	}
 
-	/** @type {Set<number | string>} */
+	/** @type {Set<Id>} */
 	#expanded = new Set();
-	/** @type {(string | number)[]} */
+	/** @type {(Id)[]} */
 	get expanded() { return [...this.#expanded]; }
 	set expanded(list) {
 		const nl = [...list];
@@ -228,13 +228,13 @@ export default class Source {
 	}
 	/**
 	 * 
-	 * @param {string | number} k 
+	 * @param {Id} k 
 	 * @returns 
 	 */
 	isCollapsed(k) { return !this.#expanded.has(k); }
 	/**
 	 * 
-	 * @param {number | string} k 
+	 * @param {Id} k 
 	 * @param {boolean} [closed] 
 	 * @returns 
 	 */
@@ -336,7 +336,7 @@ export default class Source {
 			c.destroy();
 		}
 	}
-	/** @type {string | number | undefined} */
+	/** @type {Id | undefined} */
 	#hoverId;
 	#render() {
 		if (this.#destroyed) { return; }
@@ -393,7 +393,7 @@ export default class Source {
 		this.#visibleRowIndexes = updateVisible(list, map, expanded);
 		this.requestRender();
 
-		/** @type {(number | string | symbol)[]} */
+		/** @type {(Id)[]} */
 		const newList = [];
 		for (const k of this.#checkedList) {
 			if (!map.has(k)) { continue; }

@@ -1,5 +1,5 @@
 /** @import { Row } from '../types/Row.mjs' */
-/** @import { Api, ColumnCell, ColumnOptions, RowValue } from '../types/index.mjs' */
+/** @import { Api, ColumnCell, ColumnOptions, Id, RowValue } from '../types/index.mjs' */
 /** @import Source from '../Source/index.mjs' */
 
 import Body from '../Body/index.mjs';
@@ -195,11 +195,11 @@ export default class Group {
 	/**
 	 * 
 	 * @param {Row[]} rowData 
-	 * @param {Map<string | number | symbol, Row>} rowMap 
+	 * @param {Map<Id, Row>} rowMap 
 	 * @param {number[]} visibleRowIndexes 
-	 * @param {string | number | undefined} hoverId 
-	 * @param {string | number | symbol | undefined} selectedId 
-	 * @param {Set<string | number | symbol>} checkedSet 
+	 * @param {Id | undefined} hoverId 
+	 * @param {Id | undefined} selectedId 
+	 * @param {Set<Id>} checkedSet 
 	 * @param {boolean} [force] 
 	 * @returns 
 	 */

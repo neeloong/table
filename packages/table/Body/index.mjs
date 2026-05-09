@@ -1,5 +1,5 @@
 /** @import { Row, RowDataProxy } from '../types/Row.mjs' */
-/** @import { ColumnCell, CustomizeComponent } from '../types/index.mjs' */
+/** @import { ColumnCell, CustomizeComponent, Id } from '../types/index.mjs' */
 /** @import Group from '../Group/index.mjs' */
 
 import { defaultRowHeight } from '../defaultConfig.mjs';
@@ -166,11 +166,11 @@ export default class Body {
 	 * 
 	 * @param {ColumnCell[]} columns 
 	 * @param {Row[]} rowData 
-	 * @param {Map<string | number | symbol, Row>} rowMap 
+	 * @param {Map<Id, Row>} rowMap 
 	 * @param {number[]} visibleRowIndexes 
-	 * @param {string | number | undefined} hoverId 
-	 * @param {string | number | symbol | undefined} selectedId 
-	 * @param {Set<string | number | symbol>} checkedSet 
+	 * @param {Id | undefined} hoverId 
+	 * @param {Id | undefined} selectedId 
+	 * @param {Set<Id>} checkedSet 
 	 * @param {number[]} separate 
 	 * @param {number} startFixed 
 	 * @param {boolean} [force] 

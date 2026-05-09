@@ -1,4 +1,4 @@
-/** @import { RowValue } from '@neeloong/table' */
+/** @import { Id, RowValue } from '@neeloong/table' */
 
 /**
  * 
@@ -14,13 +14,13 @@ export function getDate(data, dateFields) {
  * 
  * @param {readonly RowValue[]} allData 
  * @param {[string, (v: any) => Date | undefined][]} dateFields 
- * @returns {Map<number | string, Record<string, Date | undefined>>}
+ * @returns {Map<Id, Record<string, Date | undefined>>}
  */
 export default function getDateData(
 	allData,
 	dateFields,
 ) {
-	/** @type {Map<number | string, Record<string, Date | undefined>>} */
+	/** @type {Map<Id, Record<string, Date | undefined>>} */
 	const allLineData = new Map();
 
 	for (const { id, data } of allData) {

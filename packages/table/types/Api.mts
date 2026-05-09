@@ -1,11 +1,12 @@
 import type {RowEventMap, Emit, Listen, RowEmit, EventMap, RowListen} from "./event.mjs";
+import type { Id } from './options.mjs';
 
 export interface Api {
-	toggleSelected(id: number | string): void;
-	setCollapse(k: number | string, closed?: boolean): void;
-	isCollapsed(k: number | string): boolean;
-	setChecked(k: number | string, checked?: boolean): boolean;
-	isChecked(k: number | string): boolean;
+	toggleSelected(id: Id): void;
+	setCollapse(k: Id, closed?: boolean): void;
+	isCollapsed(k: Id): boolean;
+	setChecked(k: Id, checked?: boolean): boolean;
+	isChecked(k: Id): boolean;
 	checkedAll(): void;
 	cleanChecked(): void;
 	isAllChecked(): boolean;

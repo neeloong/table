@@ -1,8 +1,8 @@
-/** @import { EmitOption, EventContext, RowEmit, RowListen, Listener } from '../types/index.mjs' */
+/** @import { EmitOption, EventContext, RowEmit, RowListen, Listener, Id } from '../types/index.mjs' */
 
 /**
- * @param {Map<string | number, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} events
- * @param {string | number} row
+ * @param {Map<Id, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} events
+ * @param {Id} row
  * @returns {Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>}
  */
 function getRow(events, row) {
@@ -27,12 +27,12 @@ function get(rowEvents, key) {
 }
 /**
  * @template {object} T
- * @param {Map<string | number, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} events
+ * @param {Map<Id, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} events
  * @returns {RowListen<T>}
  */
 export function createListenRow(events) {
 	/**
-	 * @param {string | number} row
+	 * @param {Id} row
 	 * @param {any} key
 	 * @param {Listener<any>} fn
 	 */
@@ -54,12 +54,12 @@ export function createListenRow(events) {
 
 /**
  * @template {object} T
- * @param {Map<string | number | symbol, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} events
+ * @param {Map<Id, Map<string | symbol, Set<(v: any, ctx: EventContext) => void>>>} events
  * @returns {RowEmit<T>}
  */
 export function createEmitRow(events) {
 	/**
-	 * @param {string | number | symbol} row
+	 * @param {Id} row
 	 * @param {any} key
 	 * @param {any} value
 	 * @param {EmitOption} [opt]

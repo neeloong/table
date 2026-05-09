@@ -1,6 +1,7 @@
 import T1 from './A1.vue'
 import {Check, Tree} from '@neeloong/table';
 import type {VueColumn} from '@neeloong/table-vue';
+import { id, parent } from './symbol.mts';
 
 const columns:VueColumn[] = [
   {
@@ -16,14 +17,14 @@ const columns:VueColumn[] = [
     extensions: [Tree],
     width: 200,
     title: 'name',
-    field: 'name',
+    field: [id],
     minWidth: 20,
     resizable: true
   },
   {
     width: 100,
     title: 'parent',
-    field: 'parent',
+    field: parent,
     minWidth: 20,
     resizable: true
   },

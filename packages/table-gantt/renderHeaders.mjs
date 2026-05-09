@@ -15,7 +15,7 @@ export default function renderHeaders(gets, headers, start, end) {
 	/**
 	 * @typedef {object} Item
 	 * @property {HTMLElement[]} roots
-	 * @property {string | number} key
+	 * @property {string} key
 	 * @property {number} length
 	 * @property {Date} [date]
 	 * @property {GanttHeader} get

@@ -1,3 +1,5 @@
+import type { Id } from './options.mjs';
+
 export interface EmitOption {
 	cancelable?: boolean;
 }
@@ -29,15 +31,15 @@ export interface Listen<T extends object> {
 
 
 export interface RowEmit<T extends object> {
-	<K extends keyof T>(row: string | number | symbol, k: K, value: T[K], opt?: EmitOption): boolean;
+	<K extends keyof T>(row: Id, k: K, value: T[K], opt?: EmitOption): boolean;
 }
 export interface EventMap {
-	collapseChange: (string | number | symbol)[];
-	selectedChange: string | number | symbol | undefined;
-	checkedChange: (string | number | symbol)[];
+	collapseChange: (Id)[];
+	selectedChange: Id | undefined;
+	checkedChange: (Id)[];
 }
 
 
 export interface RowListen<T extends object> {
-	<K extends keyof T>(row: string | number, k: K, fn: Listener<T[K]>): () => void;
+	<K extends keyof T>(row: Id, k: K, fn: Listener<T[K]>): () => void;
 }

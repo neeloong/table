@@ -1,18 +1,54 @@
-/** @import { IdKey, Key } from './types/index.mjs' */
+/** @import { Id, IdKey, Key } from './types/index.mjs' */
+
+/**
+ * 
+ * @param {string | symbol | (string | symbol)[]} [key] 
+ * @returns {((v: any) => any)?}
+ */
+function createBaseKey(key) {
+	if (!key) { return null; }
+	const keys = [key].flat()
+		.filter(v => typeof v === 'symbol' || typeof v === 'string' && v);
+	if (!keys.length) { return null; }
+	return v => {
+		for (const k of keys) {
+			if (!v || typeof v !== 'object') { return; }
+			v = v[k];
+		}
+		return v;
+	};
+}
+/**
+ * 
+ * @param {any} [data] 
+ * @param {string | symbol | (string | symbol)[]} [key] 
+ * @returns {any}
+ */
+export function getKey(data, key) {
+	if (!key) { return undefined; }
+	const keys = [key].flat()
+		.filter(v => typeof v === 'symbol' || typeof v === 'string' && v);
+	if (!keys.length) { return undefined; }
+	let v = data;
+	for (const k of keys) {
+		if (!v || typeof v !== 'object') { return; }
+		v = v[k];
+	}
+	return v;
+}
+
 /**
  * @template {object} [T=object]
  * @param {IdKey<T>} [idKey] 
- * @returns {(v: any) => string | number}
+ * @returns {(v: any) => Id}
  */
 export function createIdKey(idKey) {
 	if (typeof idKey === 'function') {
 		return idKey;
 	}
-	if (typeof idKey === 'string' && idKey) {
-		return v => v[idKey];
-	}
-	return v => v.id;
+	return createBaseKey(idKey) || (v => v.id);
 }
+
 
 /**
  * @template R
@@ -24,10 +60,7 @@ export default function createKey(key) {
 	if (typeof key === 'function') {
 		return key;
 	}
-	if (typeof key === 'string' && key) {
-		return v => v[key];
-	}
-	return () => undefined;
+	return createBaseKey(key) || (() => undefined);
 }
 /**
  * 

@@ -1,5 +1,6 @@
 import type { Api } from './Api.mjs';
 import type { Emit, Listen, RowEventMap } from "./event.mjs";
+import type { Id } from './options.mjs';
 
 export interface RowApi {
 	listen: Listen<RowEventMap>;
@@ -14,9 +15,9 @@ export interface RowApi {
 }
 
 export interface RowValue {
-	id: string | number;
+	id: Id;
 	data: any;
-	parentId: number | string | undefined
+	parentId: Id | undefined
 	level: number;
 	children: RowValue[];
 }
@@ -72,7 +73,7 @@ export interface ColumnComponent {
 export interface ColumnDefine {
 	readonly width?: number;
 	readonly title?: string;
-	readonly field?: string;
+	readonly field?: string | symbol | (string | symbol)[];
 	readonly meta?: any;
 	readonly resizable?: boolean;
 	readonly minWidth?: number;
@@ -106,7 +107,7 @@ export interface CustomizeComponent {
 export interface ColumnInfo {
 	readonly key?: any;
 	readonly meta?: any;
-	readonly field?: string;
+	readonly field?: string | symbol | (string | symbol)[];
 	readonly title?: string;
 	readonly width?: number;
 	readonly minWidth?: number;
@@ -131,7 +132,7 @@ export interface CustomizeParam {
 export interface Column<T extends Record<string, any> = Record<string, any>> {
 	readonly width?: number;
 	readonly title?: string;
-	readonly field?: string;
+	readonly field?: string | symbol | (string | symbol)[];
 	readonly meta?: any;
 	readonly resizable?: boolean;
 	readonly minWidth?: number;
