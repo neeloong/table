@@ -38,22 +38,48 @@ const Gantt = (options, update, api, next, colOpt) => {
 
 	// TODO: 默认值
 	let headerGets = options?.headers || [];
-	let dateFields = Object.entries(options.dateFields || {}).map(
-		([k, d]) => /** @type {[string, (v: any) => Date | undefined]} */([k, createDateKey(d)]),
-	) || [];
-	let endDateFields = Object.entries(options.endDateFields || {}).map(
-		([k, d]) => /** @type {[string, (v: any) => Date | undefined]} */([k, createDateKey(d, true)]),
-	) || [];
+
+
+	/** @type {[string, (v: any) => Date | undefined][]} */
+	let dateFields = [];
+	/** @type {[string, (v: any) => Date | undefined][]} */
+	let endDateFields = [];
 	/** @type {LineInfo[]} */
-	let lines = options.lines?.map(({ start, end, ...line }) => ({
-		start: createDateGetter(start),
-		end: createDateGetter(end, true),
-		...line,
-	})) || [];
+	let lines = [];
 	/** @type {DotInfo[]} */
-	let dots = options.dots?.map(({ date, ...l }) => ({
-		date: createDateGetter(date), ...l,
-	})) || [];
+	let dots = [];
+	/**
+	 * 
+	 * @param {Options} options 
+	 */
+	function initFields(options) {
+		dateFields = Object.entries({
+			...Object.fromEntries([
+				...(options.lines || []).map(v => v.start).filter(v => typeof v === 'string'),
+				...(options.dots || []).map(v => v.date).filter(v => typeof v === 'string'),
+			].map(v => [v, v])),
+			...options.dateFields
+		}).map(
+			([k, d]) => /** @type {[string, (v: any) => Date | undefined]} */([k, createDateKey(d)]),
+		) || [];
+
+		endDateFields = Object.entries({
+			...Object.fromEntries((options.lines || []).map(v => v.end).filter(v => typeof v === 'string').map(v => [v, v])),
+			...options.endDateFields
+		}).map(
+			([k, d]) => /** @type {[string, (v: any) => Date | undefined]} */([k, createDateKey(d, true)]),
+		) || [];
+		lines = options.lines?.map(({ start, end, ...line }) => ({
+			start: createDateGetter(start),
+			end: createDateGetter(end, true),
+			...line,
+		})) || [];
+		dots = options.dots?.map(({ date, ...l }) => ({
+			date: createDateGetter(date), ...l,
+		})) || [];
+
+	}
+	initFields(options);
 	let onChange = options.onChange;
 
 	/** @type {Set<HTMLElement>} */
@@ -170,18 +196,7 @@ const Gantt = (options, update, api, next, colOpt) => {
 			showDate = options.showDate;
 			bg = options.bg;
 			headerGets = options.headers || [];
-			dateFields = Object.entries(options.dateFields || {})
-				.map(([k, d]) => [k, createDateKey(d)]) || [];
-			endDateFields = Object.entries(options.endDateFields || {})
-				.map(([k, d]) => [k, createDateKey(d, true)]) || [];
-			dots = options.dots?.map(({ date, ...l }) => ({
-				date: createDateGetter(date), ...l,
-			})) || [];
-			lines = options.lines?.map(({ start, end, ...line }) => ({
-				start: createDateGetter(start),
-				end: createDateGetter(end, true),
-				...line,
-			})) || [];
+			initFields(options);
 			onChange = options.onChange;
 			dayWidth = options.dayWidth || 10;
 			updateAll();
