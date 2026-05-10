@@ -119,6 +119,8 @@ for (const {dir, name, version, description, keywords: selfKeywords} of allItems
 				types: './index.d.ts',
 				node: './index.js',
 				module: './index.mjs',
+				require: './index.js',
+				import: './index.mjs',
 				unpkg: './index.js',
 				jsdelivr: './index.js',
 			},
