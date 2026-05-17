@@ -50,8 +50,6 @@
 	position: relative;
 	block-size: var(--neeloong-table-header-row-height);
 	inline-size: var(--neeloong-table-width);
-	display: block;
-
 }
 
 .neeloong-table-fixed-line {
