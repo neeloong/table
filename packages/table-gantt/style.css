@@ -44,7 +44,7 @@
 		background: #1890ff;
 		pointer-events: none;
 		margin-inline-start: calc(
-			var(--neeloong-table-gantt-start) * var(--neeloong-table-gantt-day-width)
+			var(--neeloong-table-gantt-start) * var(--neeloong-table-gantt-day-width) - 1px
 		);
 	}
 }

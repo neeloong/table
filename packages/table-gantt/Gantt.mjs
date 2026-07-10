@@ -22,12 +22,13 @@ import createDateKey, { createDateGetter } from './createDateKey.mjs';
 /** @type {Extension<Options>} */
 const Gantt = (options, update, api, next, colOpt) => {
 	const summarize = createKey(options.summarize);
-	const todayStart = new Date();
-	const todayEnd = new Date();
+	const today = new Date();
+	const todayStart = new Date(today);
+	const todayEnd = new Date(today);
 	let { tooltip, bg, showDate } = options;
 	todayStart.setHours(0, 0, 0, 0);
 	todayEnd.setHours(23, 59, 59, 999);
-	const todayN = date2n(todayStart);
+	const todayN = date2n(today);
 
 	let lineStartDate = todayStart;
 	let lineEndDate = todayEnd;

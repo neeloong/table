@@ -1,6 +1,6 @@
 /** @import { Key } from '@neeloong/table' */
 /** @import { DateGetter, DateKey } from './types.mjs' */
-const regex = /^(\d+)-(\d{1,2})-(\d{1,2})(?:(?: +|[Tt])([0-1]?\d|2[0-3])(?::([0-5]?\d)(?::([0-5]?\d)(?:.(?:(\d+))?)?)?)?)?$/;
+const regex = /^(?<Y>\d+)-(?<M>\d{1,2})-(?<D>\d{1,2})(?:(?: +|[Tt])(?<h>[0-1]?\d|2[0-3])(?::(?<m>[0-5]?\d)(?::(?<s>[0-5]?\d)(?:.(?:(?<ms>\d+))?)?)?)?(?<z>z|Z|[+-]\d{1,2}:\d{1,2}|[+-]\d{2}(:?\d{2})?)?)?$/;
 /**
  * 
  * @param {string | Date | null} [v] 
@@ -10,17 +10,35 @@ function parse(v) {
 	if (!v) { return; }
 	if (v instanceof Date) { return Number(v) ? v : undefined; }
 	if (typeof v !== 'string') { return; }
-	const r = regex.exec(v);
+	const r = regex.exec(v)?.groups;
 	if (!r) { return; }
-	const Y = parseInt(r[1]);
-	const M = parseInt(r[2]) - 1;
-	const D = parseInt(r[3]);
-	const h = parseInt(r[4] || '23');
-	const m = parseInt(r[5] || '59');
-	const s = parseInt(r[6] || '59');
-	const ms = parseFloat(`0.${r[7] || '999'}`) * 1000;
+	const Y = parseInt(r.Y);
+	const M = parseInt(r.M) - 1;
+	const D = parseInt(r.D);
+	if (!r.h) {
+		const date = new Date(Y, M, D, 23, 59, 59, 999);
+		return Number(date) ? date : undefined;
+	}
+	const h = parseInt(r.h || '23');
+	const m = parseInt(r.m || '59');
+	const s = parseInt(r.s || '59');
+	const ms = parseFloat(`0.${r.ms || '999'}`) * 1000;
 	const date = new Date(Y, M, D, h, m, s, ms);
-	return Number(date) ? date : undefined;
+	const z = r.z;
+	if (!z) { return Number(date) ? date : undefined; }
+	let t = Number(date);
+	t -= date.getTimezoneOffset() * 60000;
+	if (z.includes(':')) {
+		const [h, m] = z.split(':');
+		const offset = parseInt(h) * 60 + parseInt(m);
+		t -= offset * 60000;
+	} else if (z !== 'z' && z !== 'Z') {
+		const h = z.slice(0, 3);
+		const m = z.slice(3) || '0';
+		const offset = parseInt(h) * 60 + parseInt(m);
+		t -= offset * 60000;
+	}
+	return t ? new Date(t) : undefined;
 
 }
 /**
